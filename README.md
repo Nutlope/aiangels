@@ -9,3 +9,4 @@ startups.
 - [ ] DM folks to see if they want to clean up bios or give me typical check #
 - [ ] Add categories for check size to filter by that
 - [ ] Add search bar next to categories
+- [ ] Make details page smaller
