@@ -10,13 +10,14 @@ datasource db {
 model Investor {
   id             Int      @id @default(autoincrement())
   name           String
-  email          String
-  twitterPicture String
-  company        String
-  title          String
-  checkSize      String
-  details        String
-  site           String
+  email          String?
+  twitterPicture String?
+  company        String?
+  title          String?
+  checkSize      String?
+  details        String?
+  site           String?
+  rank           Int?     @default(0)
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
