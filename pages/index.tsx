@@ -13,7 +13,7 @@ function compare(a: any, b: any) {
 }
 
 export default function Dashboard({ angels }: any) {
-  angels = angels.sort(compare);
+  angels = JSON.parse(angels).sort(compare);
   function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ");
   }
@@ -37,12 +37,16 @@ export default function Dashboard({ angels }: any) {
             </h1>
             <p className="mt-2 text-gray-700">
               A list of active angel investors that invest in developer tool
-              startups. This list primarily comes from{" "}
+              startups. This list is based on{" "}
               <a href="https://github.com/sw-yx/devtools-angels">
                 {" "}
                 swyx's devtools-angels repo.
               </a>
             </p>
+          </div>
+          <div>
+            Want to add yourself as an angel investor?{" "}
+            <a href="https://twitter.com/nutlope">DM me</a>.
           </div>
         </div>
         <div className="relative mt-10">
@@ -140,11 +144,7 @@ export default function Dashboard({ angels }: any) {
                             </div>
                             <div className="ml-4">
                               <div className="font-medium text-gray-900">
-                                {`${
-                                  person.first_name
-                                    ? person.first_name
-                                    : "Unknown"
-                                } ${person.last_name ? person.last_name : ""}`}
+                                {person.name}
                               </div>
                               <div className="text-gray-500">
                                 {person.email}
@@ -173,12 +173,13 @@ export default function Dashboard({ angels }: any) {
                               "inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5  "
                             )}
                           >
-                            {person.checkSize === "regular"
+                            {person.checkSize}
+                            {/* {person.checkSize === "regular"
                               ? "Community"
                               : person.checkSize === "exec"
                               ? "Exec Track"
                               : person.checkSize[0].toUpperCase() +
-                                person.checkSize.slice(1).toLowerCase()}
+                                person.checkSize.slice(1).toLowerCase()} */}
                           </span>
                         </td>
                         <td className="max-w-xs px-3 py-4 text-sm text-gray-500">
@@ -202,7 +203,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      angels,
+      angels: JSON.stringify(angels),
     },
   };
 }

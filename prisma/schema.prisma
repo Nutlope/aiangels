@@ -16,6 +16,7 @@ model Investor {
   title          String
   checkSize      String
   details        String
+  site           String
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 }
