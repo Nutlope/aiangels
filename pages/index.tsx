@@ -29,7 +29,6 @@ export default function Dashboard({ angels }: any) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      ;
       <div className="mx-auto max-w-6xl pt-20">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
