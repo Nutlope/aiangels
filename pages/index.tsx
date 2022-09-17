@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import Image from "next/future/image";
 import Head from "next/head";
 import prisma from "../utils/prisma";
