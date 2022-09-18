@@ -11,6 +11,7 @@ startups.
 
 ## Todos v2
 
+- [x] Add analytics
 - [ ] Make check size into a group (change prisma schema) & sort by the id
 - [ ] Add categories for check size to filter by that
 - [ ] Add a twitter check mark for folks who've confirmed their information and tweet about it
