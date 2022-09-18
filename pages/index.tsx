@@ -286,7 +286,7 @@ export default function Dashboard({ data }: any) {
                   <tbody className="divide-y divide-gray-200 bg-white">
                     {angels.map((person: any) => (
                       <tr key={person.email}>
-                        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                        <td className="whitespace-nowrap py-2 pl-3 pr-2 text-sm sm:pl-6">
                           <div className="flex items-center">
                             <div className="h-10 w-10 flex-shrink-0">
                               <Image
@@ -360,13 +360,13 @@ export default function Dashboard({ data }: any) {
                             </div>
                           </div>
                         </td>
-                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        <td className="whitespace-nowrap px-2 py-3 text-sm text-gray-500">
                           {person.company ? person.company : "Unknown"}
                         </td>
-                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        <td className="whitespace-nowrap px-2 py-3 text-sm text-gray-500">
                           {person.title ? person.title : "Software Engineer"}
                         </td>
-                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        <td className="whitespace-nowrap px-2 py-3 text-sm text-gray-500">
                           <span
                             className={classNames(
                               person.checkSize === "$2-5k"
@@ -386,7 +386,7 @@ export default function Dashboard({ data }: any) {
                             {person.checkSize ? person.checkSize : "Unknown"}
                           </span>
                         </td>
-                        <td className="max-w-xs px-3 py-4 text-sm text-gray-500">
+                        <td className="max-w-xs px-2 py-3 text-sm text-gray-500">
                           {person.details}
                         </td>
                       </tr>
