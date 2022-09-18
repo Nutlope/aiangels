@@ -13,18 +13,11 @@ startups, built with Next.js, Tailwind, and Postgres on Railway.
 
 - [x] Add analytics
 - [x] Add a twitter check mark for folks who've confirmed their information and tweet about it
+- [x] Make other elements on the page smaller to allow more space for details
+- [x] Tweet about progress
 - [ ] Make check size into a group (change prisma schema) & sort by the id
-- [ ] Add categories for check size to filter by that
-- [ ] Add search bar next to categories
-- [ ] Tweet yesterday took off! Spending some more time today adding:
-  - [ ] Check marks for folks who confirm their information is accurate and up to date
-  - [ ] Filtering based on check size
-  - [ ] Search capabilities
-- [ ] Make other elements on the page smaller to allow more space for details
-- [ ] Make it responsive on mobile by playing around with the categories (can hide on mobile)
+- [ ] Make categories and search work
 
-# Credit
+## Todos v3
 
-- Tailwind UI for the components
-- Plausible for site analytics
-- [Flaticon](https://www.flaticon.com/) for the verified icon
+- [ ] Make it responsive on mobile by playing around with the categories (hiding on mobile for now)
