@@ -1,7 +1,7 @@
 # Devtool Angels
 
 A list of active angel investors that invest in developer tool
-startups.
+startups. Going live in 24h!
 
 ## Todos v1
 
@@ -19,6 +19,6 @@ startups.
     - [ ] Check marks for folks who confirm their information is accurate and up to date
     - [ ] Filtering based on check size
     - [ ] Search capabilities
-- [ ] Increase check size font
 - [ ] Add search bar next to categories
-- [ ] Make details page smaller
+- [ ] Increase check size font
+- [ ] Make other elements on the page smaller to allow more space for details
