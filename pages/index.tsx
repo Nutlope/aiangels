@@ -1,6 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unescaped-entities */
 import Image from "next/future/image";
 import Head from "next/head";
+import { useEffect, useState } from "react";
+import EmailIcon from "../components/EmailIcon";
 import prisma from "../utils/prisma";
 
 function compare(a: any, b: any) {
@@ -14,16 +17,47 @@ function compare(a: any, b: any) {
 }
 
 export default function Dashboard({ data }: any) {
-  let angels = JSON.parse(data)
-    .filter((angel: any) => !angel.hidden)
-    .sort(compare);
+  const [currentType, setCurrentType] = useState("all");
+  const [angels, setAngels] = useState(
+    JSON.parse(data)
+      .filter((angel: any) => !angel.hidden)
+      .sort(compare)
+  );
 
   function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ");
   }
 
+  function typeSelect(e: any) {
+    setCurrentType(e.currentTarget.id);
+  }
+
+  useEffect(() => {
+    if (currentType === "all") {
+      setAngels(
+        JSON.parse(data)
+          .filter((angel: any) => !angel.hidden)
+          .sort(compare)
+      );
+    } else if (currentType === "community") {
+      setAngels(
+        JSON.parse(data)
+          .filter((angel: any) => !angel.hidden)
+          .sort(compare)
+          .filter((person: any) => person.group_id === "regular")
+      );
+    } else {
+      setAngels(
+        JSON.parse(data)
+          .filter((angel: any) => !angel.hidden)
+          .sort(compare)
+          .filter((person: any) => person.group_id === currentType)
+      );
+    }
+  }, [currentType]);
+
   return (
-    <div className="min-h-screen bg-gray-100 px-4 pb-20 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-100 px-4 pb-10 sm:px-6 lg:px-8">
       <Head>
         <title>Devtool Angels</title>
         <meta
@@ -39,20 +73,19 @@ export default function Dashboard({ data }: any) {
               Devtool Angels
             </h1>
             <p className="mt-2 text-gray-700">
-              A list of angel investors that invest in developer tools. <br />{" "}
-              Based on{" "}
+              A list of angel investors that invest in developer tools based on{" "}
               <a
                 href="https://github.com/sw-yx/devtools-angels"
                 className="text-blue-500"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                swyx's devtools-angels
+                devtools-angels
               </a>
               .
             </p>
           </div>
-          <div className="text-gray-700 mt-2 sm:mt-8">
+          <div className="text-gray-700 sm:-mt-9 mt-2 text-sm">
             Want to add yourself as an angel investor?{" "}
             <a
               className="text-blue-500"
@@ -63,22 +96,6 @@ export default function Dashboard({ data }: any) {
               DM me
             </a>
             .
-            <div className="mt-1">
-              <svg
-                height="20"
-                viewBox="0 0 512 512"
-                width="20"
-                xmlns="http://www.w3.org/2000/svg"
-                className="inline mr-1"
-              >
-                <path
-                  d="m512 268c0 17.9-4.3 34.5-12.9 49.7s-20.1 27.1-34.6 35.4c.4 2.7.6 6.9.6 12.6 0 27.1-9.1 50.1-27.1 69.1-18.1 19.1-39.9 28.6-65.4 28.6-11.4 0-22.3-2.1-32.6-6.3-8 16.4-19.5 29.6-34.6 39.7-15 10.2-31.5 15.2-49.4 15.2-18.3 0-34.9-4.9-49.7-14.9-14.9-9.9-26.3-23.2-34.3-40-10.3 4.2-21.1 6.3-32.6 6.3-25.5 0-47.4-9.5-65.7-28.6-18.3-19-27.4-42.1-27.4-69.1 0-3 .4-7.2 1.1-12.6-14.5-8.4-26-20.2-34.6-35.4-8.5-15.2-12.8-31.8-12.8-49.7 0-19 4.8-36.5 14.3-52.3s22.3-27.5 38.3-35.1c-4.2-11.4-6.3-22.9-6.3-34.3 0-27 9.1-50.1 27.4-69.1s40.2-28.6 65.7-28.6c11.4 0 22.3 2.1 32.6 6.3 8-16.4 19.5-29.6 34.6-39.7 15-10.1 31.5-15.2 49.4-15.2s34.4 5.1 49.4 15.1c15 10.1 26.6 23.3 34.6 39.7 10.3-4.2 21.1-6.3 32.6-6.3 25.5 0 47.3 9.5 65.4 28.6s27.1 42.1 27.1 69.1c0 12.6-1.9 24-5.7 34.3 16 7.6 28.8 19.3 38.3 35.1 9.5 15.9 14.3 33.4 14.3 52.4zm-266.9 77.1 105.7-158.3c2.7-4.2 3.5-8.8 2.6-13.7-1-4.9-3.5-8.8-7.7-11.4-4.2-2.7-8.8-3.6-13.7-2.9-5 .8-9 3.2-12 7.4l-93.1 140-42.9-42.8c-3.8-3.8-8.2-5.6-13.1-5.4-5 .2-9.3 2-13.1 5.4-3.4 3.4-5.1 7.7-5.1 12.9 0 5.1 1.7 9.4 5.1 12.9l58.9 58.9 2.9 2.3c3.4 2.3 6.9 3.4 10.3 3.4 6.7-.1 11.8-2.9 15.2-8.7z"
-                  fill="#1da1f2"
-                />
-              </svg>
-              means the angel investor has confirmed their information is
-              accurate.
-            </div>
           </div>
         </div>
         <div className="relative mt-10">
@@ -118,6 +135,113 @@ export default function Dashboard({ data }: any) {
                 </dd>
               </div>
             </dl>
+          </div>
+        </div>
+        <div className="sm:flex justify-between hidden mt-4">
+          <span className="isolate mt-5 inline-flex rounded-md shadow-sm">
+            <button
+              type="button"
+              id="all"
+              className={classNames(
+                currentType === "all"
+                  ? "bg-gray-200"
+                  : "bg-white hover:bg-gray-50",
+                "relative inline-flex items-center rounded-l-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10 focus:outline-none focus:ring-gray-500"
+              )}
+              onClick={(e) => typeSelect(e)}
+            >
+              All
+            </button>
+            <button
+              type="button"
+              id="community"
+              className={classNames(
+                currentType === "community"
+                  ? "bg-gray-200"
+                  : "bg-white hover:bg-gray-50",
+                "relative -ml-px inline-flex items-center border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10  focus:outline-none focus:ring-gray-500"
+              )}
+              onClick={(e) => typeSelect(e)}
+            >
+              $2-5k
+            </button>
+            <button
+              type="button"
+              id="partner"
+              className={classNames(
+                currentType === "partner"
+                  ? "bg-gray-200"
+                  : "bg-white hover:bg-gray-50",
+                "relative -ml-px inline-flex items-center border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10  focus:outline-none focus:ring-gray-500"
+              )}
+              onClick={(e) => typeSelect(e)}
+            >
+              $5-15k
+            </button>
+            <button
+              type="button"
+              id="customer"
+              className={classNames(
+                currentType === "customer"
+                  ? "bg-gray-200"
+                  : "bg-white hover:bg-gray-50",
+                "relative -ml-px inline-flex items-center border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10  focus:outline-none focus:ring-gray-500"
+              )}
+              onClick={(e) => typeSelect(e)}
+            >
+              $15-$25k
+            </button>
+            <button
+              type="button"
+              id="sponsor"
+              className={classNames(
+                currentType === "sponsor"
+                  ? "bg-gray-200"
+                  : "bg-white hover:bg-gray-50",
+                "relative -ml-px inline-flex items-center border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10  focus:outline-none focus:ring-gray-500"
+              )}
+              onClick={(e) => typeSelect(e)}
+            >
+              $25-$50k
+            </button>
+            <button
+              type="button"
+              id="exec"
+              className={classNames(
+                currentType === "exec"
+                  ? "bg-gray-200"
+                  : "bg-white hover:bg-gray-50",
+                "relative -ml-px inline-flex items-center border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10  focus:outline-none focus:ring-gray-500"
+              )}
+              onClick={(e) => typeSelect(e)}
+            >
+              $50k-100k
+            </button>
+            <button
+              type="button"
+              id="press"
+              className={classNames(
+                currentType === "press"
+                  ? "bg-gray-200"
+                  : "bg-white hover:bg-gray-50",
+                "relative -ml-px inline-flex items-center rounded-r-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10 focus:outline-none focus:ring-gray-500"
+              )}
+              onClick={(e) => typeSelect(e)}
+            >
+              $100k+
+            </button>
+          </span>
+          <div className="relative mt-5">
+            <EmailIcon
+              className="h-5 w-5 absolute z-20 left-3 bottom-2 feather feather-search"
+              aria-hidden="true"
+            />
+            <input
+              type="text"
+              id="search"
+              className=" rounded-xl shadow-sm inline-flex relative items-center border border-gray-300 px-4 py-2 text-sm text-gray-700 placeholder:text-gray-600 focus:z-10 focus:outline-none focus:ring-gray-500 w-72 pl-10 xs:pl-12"
+              placeholder="Search"
+            />
           </div>
         </div>
         <div className="mt-8 flex flex-col">
@@ -243,7 +367,6 @@ export default function Dashboard({ data }: any) {
                           {person.title ? person.title : "Software Engineer"}
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                          {/* // Check sizes are: 2-5k, 5-15k, 15-25k, 25-50k, 100k+ */}
                           <span
                             className={classNames(
                               person.checkSize === "$2-5k"
@@ -270,6 +393,22 @@ export default function Dashboard({ data }: any) {
                     ))}
                   </tbody>
                 </table>
+              </div>
+              <div className="text-center mt-10">
+                <svg
+                  height="20"
+                  viewBox="0 0 512 512"
+                  width="20"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="inline mr-1"
+                >
+                  <path
+                    d="m512 268c0 17.9-4.3 34.5-12.9 49.7s-20.1 27.1-34.6 35.4c.4 2.7.6 6.9.6 12.6 0 27.1-9.1 50.1-27.1 69.1-18.1 19.1-39.9 28.6-65.4 28.6-11.4 0-22.3-2.1-32.6-6.3-8 16.4-19.5 29.6-34.6 39.7-15 10.2-31.5 15.2-49.4 15.2-18.3 0-34.9-4.9-49.7-14.9-14.9-9.9-26.3-23.2-34.3-40-10.3 4.2-21.1 6.3-32.6 6.3-25.5 0-47.4-9.5-65.7-28.6-18.3-19-27.4-42.1-27.4-69.1 0-3 .4-7.2 1.1-12.6-14.5-8.4-26-20.2-34.6-35.4-8.5-15.2-12.8-31.8-12.8-49.7 0-19 4.8-36.5 14.3-52.3s22.3-27.5 38.3-35.1c-4.2-11.4-6.3-22.9-6.3-34.3 0-27 9.1-50.1 27.4-69.1s40.2-28.6 65.7-28.6c11.4 0 22.3 2.1 32.6 6.3 8-16.4 19.5-29.6 34.6-39.7 15-10.1 31.5-15.2 49.4-15.2s34.4 5.1 49.4 15.1c15 10.1 26.6 23.3 34.6 39.7 10.3-4.2 21.1-6.3 32.6-6.3 25.5 0 47.3 9.5 65.4 28.6s27.1 42.1 27.1 69.1c0 12.6-1.9 24-5.7 34.3 16 7.6 28.8 19.3 38.3 35.1 9.5 15.9 14.3 33.4 14.3 52.4zm-266.9 77.1 105.7-158.3c2.7-4.2 3.5-8.8 2.6-13.7-1-4.9-3.5-8.8-7.7-11.4-4.2-2.7-8.8-3.6-13.7-2.9-5 .8-9 3.2-12 7.4l-93.1 140-42.9-42.8c-3.8-3.8-8.2-5.6-13.1-5.4-5 .2-9.3 2-13.1 5.4-3.4 3.4-5.1 7.7-5.1 12.9 0 5.1 1.7 9.4 5.1 12.9l58.9 58.9 2.9 2.3c3.4 2.3 6.9 3.4 10.3 3.4 6.7-.1 11.8-2.9 15.2-8.7z"
+                    fill="#1da1f2"
+                  />
+                </svg>
+                means the angel investor has confirmed their information is
+                accurate and up to date.
               </div>
             </div>
           </div>

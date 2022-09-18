@@ -12,16 +12,16 @@ startups, built with Next.js, Tailwind, and Postgres on Railway.
 ## Todos v2
 
 - [x] Add analytics
-- [ ] Add a twitter check mark for folks who've confirmed their information and tweet about it
-  - [ ] Tweet yesterday took off! Spending some more time today adding:
-    - [ ] Check marks for folks who confirm their information is accurate and up to date
-    - [ ] Filtering based on check size
-    - [ ] Search capabilities
+- [x] Add a twitter check mark for folks who've confirmed their information and tweet about it
 - [ ] Make check size into a group (change prisma schema) & sort by the id
 - [ ] Add categories for check size to filter by that
 - [ ] Add search bar next to categories
-- [ ] Increase check size font
+- [ ] Tweet yesterday took off! Spending some more time today adding:
+  - [ ] Check marks for folks who confirm their information is accurate and up to date
+  - [ ] Filtering based on check size
+  - [ ] Search capabilities
 - [ ] Make other elements on the page smaller to allow more space for details
+- [ ] Make it responsive on mobile by playing around with the categories (can hide on mobile)
 
 # Credit
 
