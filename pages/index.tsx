@@ -107,7 +107,7 @@ export default function Dashboard({ data }: any) {
                   Confirmed Investments
                 </dt>
                 <dd className="order-1 text-5xl font-bold tracking-tight text-black">
-                  11+
+                  30+
                 </dd>
               </div>
               <div className="flex flex-col border-t border-gray-100 p-6 text-center sm:border-0 sm:border-l">
@@ -115,7 +115,7 @@ export default function Dashboard({ data }: any) {
                   Companies
                 </dt>
                 <dd className="order-1 text-5xl font-bold tracking-tight text-black">
-                  {angels.length}
+                  37
                 </dd>
               </div>
             </dl>
