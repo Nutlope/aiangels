@@ -72,7 +72,9 @@ export default function Dashboard({ data }: any) {
       setAngels(
         JSON.parse(data)
           .filter((angel: any) => !angel.hidden)
-          .filter((angel: any) => angel.name.includes(search))
+          .filter((angel: any) =>
+            angel.name.toLowerCase().includes(search.toLowerCase())
+          )
           .sort(compare)
       );
     } else {
@@ -83,7 +85,9 @@ export default function Dashboard({ data }: any) {
           .filter(
             (person: any) => person.checksize_id.toString() === currentType
           )
-          .filter((angel: any) => angel.name.includes(search))
+          .filter((angel: any) =>
+            angel.name.toLowerCase().includes(search.toLowerCase())
+          )
       );
     }
   }, [currentType, search]);
