@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import EmailIcon from "../components/EmailIcon";
 import prisma from "../utils/prisma";
 
+// TODO: Move all of these to a utils file
 function compare(a: any, b: any) {
   if (a.twitterVerified === true && b.twitterVerified !== true) {
     return -1;
@@ -56,6 +57,7 @@ export default function Dashboard({ data }: any) {
   );
   const [companies, setCompanies] = useState([]);
   const [averageCheck, setAverageCheck] = useState(0);
+  const [search, setSearch] = useState("");
 
   function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ");
@@ -70,6 +72,7 @@ export default function Dashboard({ data }: any) {
       setAngels(
         JSON.parse(data)
           .filter((angel: any) => !angel.hidden)
+          .filter((angel: any) => angel.name.includes(search))
           .sort(compare)
       );
     } else {
@@ -80,9 +83,10 @@ export default function Dashboard({ data }: any) {
           .filter(
             (person: any) => person.checksize_id.toString() === currentType
           )
+          .filter((angel: any) => angel.name.includes(search))
       );
     }
-  }, [currentType]);
+  }, [currentType, search]);
 
   useEffect(() => {
     let tempCompanies: any = [];
@@ -165,7 +169,9 @@ export default function Dashboard({ data }: any) {
                   Average Check Size
                 </dt>
                 <dd className="order-1 text-5xl font-bold tracking-tight text-black">
-                  {"$" + kFormatter(averageCheck)}
+                  {kFormatter(averageCheck)
+                    ? "$" + kFormatter(averageCheck)
+                    : "$0"}
                 </dd>
               </div>
               <div className="flex flex-col border-t border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r">
@@ -277,8 +283,11 @@ export default function Dashboard({ data }: any) {
             <input
               type="text"
               id="search"
-              className=" rounded-xl shadow-sm inline-flex relative items-center border border-gray-300 px-4 py-2 text-sm text-gray-700 placeholder:text-gray-600 focus:z-10 focus:outline-none focus:ring-gray-500 w-72 pl-10 xs:pl-12"
-              placeholder="Search"
+              name="search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className=" rounded-xl shadow-sm inline-flex relative items-center border border-gray-300 px-4 py-2 text-sm text-gray-700 placeholder:text-gray-400 focus:z-10 focus:outline-none focus:ring-gray-500 w-72 pl-10 xs:pl-12"
+              placeholder="Search by name"
             />
           </div>
         </div>
@@ -322,9 +331,14 @@ export default function Dashboard({ data }: any) {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white">
+                    {angels.length === 0 && (
+                      <td className="whitespace-nowrap px-2 py-3 text-center text-gray-500">
+                        No results found
+                      </td>
+                    )}
                     {angels.map((person: any) => (
                       <tr key={person.email}>
-                        <td className="whitespace-nowrap py-2 pl-3 pr-2 text-sm sm:pl-6">
+                        <td className="whitespace-nowrap py-2 pl-3 text-sm sm:pl-6">
                           <div className="flex items-center">
                             <div className="h-10 w-10 flex-shrink-0">
                               <Image
