@@ -19,8 +19,10 @@ startups, built with Next.js, Tailwind, and Postgres on Railway.
 - [x] Make check size into a group (change prisma schema) & sort by the id
 - [x] Make categories and dashboard work
 - [x] Make search work
-- [ ] Fix layout shift with search
+- [ ] Fix small layout shift with search
 
 ## Todos v3
 
+- [ ] Add an OG Image
 - [ ] Make it responsive on mobile by playing around with the categories (hiding on mobile for now)
+- [ ] Split index page into multiple components

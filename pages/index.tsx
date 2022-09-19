@@ -5,48 +5,12 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import EmailIcon from "../components/EmailIcon";
 import prisma from "../utils/prisma";
-
-// TODO: Move all of these to a utils file
-function compare(a: any, b: any) {
-  if (a.twitterVerified === true && b.twitterVerified !== true) {
-    return -1;
-  }
-  if (a.twitterVerified !== true && b.twitterVerified === true) {
-    return 1;
-  }
-  if (a.checksize_id > b.checksize_id) {
-    return -1;
-  }
-  if (a.checksize_id < b.checksize_id) {
-    return 1;
-  }
-  return 0;
-}
-
-function kFormatter(num: any) {
-  return Math.abs(num) > 4000
-    ? Math.sign(num) * Number((Math.abs(num) / 1000).toFixed(0)) + "k"
-    : Math.sign(num) * Math.abs(num);
-}
-
-let checkSizeMap = {
-  0: "Unknown",
-  1: "$2-5k",
-  2: "$5-15k",
-  3: "$15-25k",
-  4: "$25-50k",
-  6: "$100k+",
-  7: "All",
-};
-
-let averageCheckSize = {
-  0: 0,
-  1: 3500,
-  2: 10000,
-  3: 20000,
-  4: 37500,
-  6: 100000,
-};
+import {
+  averageCheckSize,
+  checkSizeMap,
+  compare,
+  kFormatter,
+} from "../utils/utils";
 
 export default function Dashboard({ data }: any) {
   const [currentType, setCurrentType] = useState("7");
@@ -93,6 +57,7 @@ export default function Dashboard({ data }: any) {
   }, [currentType, search]);
 
   useEffect(() => {
+    // Get all the companies that angels are working at
     let tempCompanies: any = [];
     for (let user of angels) {
       if (!tempCompanies.includes(user.company)) {
@@ -101,7 +66,7 @@ export default function Dashboard({ data }: any) {
     }
     setCompanies(tempCompanies);
 
-    // calculate the average check size
+    // Calculate the average check size
     let total = 0;
     let count = 0;
     angels.forEach((angel: any) => {
@@ -335,11 +300,6 @@ export default function Dashboard({ data }: any) {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white">
-                    {angels.length === 0 && (
-                      <td className="whitespace-nowrap px-2 py-3 text-center text-gray-500">
-                        No results found
-                      </td>
-                    )}
                     {angels.map((person: any) => (
                       <tr key={person.email}>
                         <td className="whitespace-nowrap py-2 pl-3 text-sm sm:pl-6">
@@ -449,6 +409,9 @@ export default function Dashboard({ data }: any) {
                     ))}
                   </tbody>
                 </table>
+                {angels.length === 0 && (
+                  <div className="text-center my-10">No results found</div>
+                )}
               </div>
               <div className="text-center mt-10">
                 <svg
