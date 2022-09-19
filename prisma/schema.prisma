@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Investor {
-  id              Int      @id @default(autoincrement())
+  id              Int        @id @default(autoincrement())
   name            String
   email           String?
   twitterPicture  String?
@@ -17,9 +17,17 @@ model Investor {
   checkSize       String?
   details         String?
   site            String?
-  twitterVerified Boolean? @default(false)
-  hidden          Boolean? @default(false)
-  rank            Int?     @default(0)
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  twitterVerified Boolean?   @default(false)
+  hidden          Boolean?   @default(false)
+  rank            Int?       @default(0)
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  checksize       CheckSize? @relation(fields: [checksize_id], references: [id])
+  checksize_id    Int?
+}
+
+model CheckSize {
+  id     Int        @unique
+  name   String     @unique
+  angels Investor[]
 }

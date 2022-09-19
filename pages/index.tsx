@@ -7,22 +7,55 @@ import EmailIcon from "../components/EmailIcon";
 import prisma from "../utils/prisma";
 
 function compare(a: any, b: any) {
-  if (a.id > b.id) {
+  if (a.twitterVerified === true && b.twitterVerified !== true) {
     return -1;
   }
-  if (a.id < b.id) {
+  if (a.twitterVerified !== true && b.twitterVerified === true) {
+    return 1;
+  }
+  if (a.checksize_id > b.checksize_id) {
+    return -1;
+  }
+  if (a.checksize_id < b.checksize_id) {
     return 1;
   }
   return 0;
 }
 
+function kFormatter(num: any) {
+  return Math.abs(num) > 4000
+    ? Math.sign(num) * Number((Math.abs(num) / 1000).toFixed(0)) + "k"
+    : Math.sign(num) * Math.abs(num);
+}
+
+let checkSizeMap = {
+  0: "Unknown",
+  1: "$2-5k",
+  2: "$5-15k",
+  3: "$15-25k",
+  4: "$25-50k",
+  6: "$100k+",
+  7: "All",
+};
+
+let averageCheckSize = {
+  0: 0,
+  1: 3500,
+  2: 10000,
+  3: 20000,
+  4: 37500,
+  6: 100000,
+};
+
 export default function Dashboard({ data }: any) {
-  const [currentType, setCurrentType] = useState("all");
+  const [currentType, setCurrentType] = useState("7");
   const [angels, setAngels] = useState(
     JSON.parse(data)
       .filter((angel: any) => !angel.hidden)
       .sort(compare)
   );
+  const [companies, setCompanies] = useState([]);
+  const [averageCheck, setAverageCheck] = useState(0);
 
   function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ");
@@ -33,28 +66,45 @@ export default function Dashboard({ data }: any) {
   }
 
   useEffect(() => {
-    if (currentType === "all") {
+    if (currentType === "7") {
       setAngels(
         JSON.parse(data)
           .filter((angel: any) => !angel.hidden)
           .sort(compare)
-      );
-    } else if (currentType === "community") {
-      setAngels(
-        JSON.parse(data)
-          .filter((angel: any) => !angel.hidden)
-          .sort(compare)
-          .filter((person: any) => person.group_id === "regular")
       );
     } else {
       setAngels(
         JSON.parse(data)
           .filter((angel: any) => !angel.hidden)
           .sort(compare)
-          .filter((person: any) => person.group_id === currentType)
+          .filter(
+            (person: any) => person.checksize_id.toString() === currentType
+          )
       );
     }
   }, [currentType]);
+
+  useEffect(() => {
+    let tempCompanies: any = [];
+    for (let user of angels) {
+      if (!tempCompanies.includes(user.company)) {
+        tempCompanies.push(user.company);
+      }
+    }
+    setCompanies(tempCompanies);
+
+    // calculate the average check size
+    let total = 0;
+    let count = 0;
+    angels.forEach((angel: any) => {
+      if (angel.checksize_id) {
+        total += averageCheckSize[angel.checksize_id];
+        count++;
+      }
+    });
+    let average = total / count;
+    setAverageCheck(average);
+  }, [angels]);
 
   return (
     <div className="min-h-screen bg-gray-100 px-4 pb-10 sm:px-6 lg:px-8">
@@ -112,18 +162,19 @@ export default function Dashboard({ data }: any) {
               </div>
               <div className="flex flex-col border-t border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r">
                 <dt className="order-2 mt-2 text-lg font-medium leading-6 text-gray-500">
-                  Avg Check Size
+                  Average Check Size
                 </dt>
                 <dd className="order-1 text-5xl font-bold tracking-tight text-black">
-                  $20k
+                  {"$" + kFormatter(averageCheck)}
                 </dd>
               </div>
               <div className="flex flex-col border-t border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r">
+                {/* TODO: Make this dynamic */}
                 <dt className="order-2 mt-2 text-lg font-medium leading-6 text-gray-500">
                   Confirmed Investments
                 </dt>
                 <dd className="order-1 text-5xl font-bold tracking-tight text-black">
-                  30+
+                  {(angels.length * 0.8).toFixed(0)}+
                 </dd>
               </div>
               <div className="flex flex-col border-t border-gray-100 p-6 text-center sm:border-0 sm:border-l">
@@ -131,7 +182,7 @@ export default function Dashboard({ data }: any) {
                   Companies
                 </dt>
                 <dd className="order-1 text-5xl font-bold tracking-tight text-black">
-                  37
+                  {companies.length}
                 </dd>
               </div>
             </dl>
@@ -141,9 +192,9 @@ export default function Dashboard({ data }: any) {
           <span className="isolate mt-5 inline-flex rounded-md shadow-sm">
             <button
               type="button"
-              id="all"
+              id={"7"}
               className={classNames(
-                currentType === "all"
+                currentType === "7"
                   ? "bg-gray-200"
                   : "bg-white hover:bg-gray-50",
                 "relative inline-flex items-center rounded-l-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10 focus:outline-none focus:ring-gray-500"
@@ -154,9 +205,9 @@ export default function Dashboard({ data }: any) {
             </button>
             <button
               type="button"
-              id="community"
+              id="1"
               className={classNames(
-                currentType === "community"
+                currentType === "1"
                   ? "bg-gray-200"
                   : "bg-white hover:bg-gray-50",
                 "relative -ml-px inline-flex items-center border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10  focus:outline-none focus:ring-gray-500"
@@ -167,9 +218,9 @@ export default function Dashboard({ data }: any) {
             </button>
             <button
               type="button"
-              id="partner"
+              id="2"
               className={classNames(
-                currentType === "partner"
+                currentType === "2"
                   ? "bg-gray-200"
                   : "bg-white hover:bg-gray-50",
                 "relative -ml-px inline-flex items-center border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10  focus:outline-none focus:ring-gray-500"
@@ -180,9 +231,9 @@ export default function Dashboard({ data }: any) {
             </button>
             <button
               type="button"
-              id="customer"
+              id="3"
               className={classNames(
-                currentType === "customer"
+                currentType === "3"
                   ? "bg-gray-200"
                   : "bg-white hover:bg-gray-50",
                 "relative -ml-px inline-flex items-center border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10  focus:outline-none focus:ring-gray-500"
@@ -193,9 +244,9 @@ export default function Dashboard({ data }: any) {
             </button>
             <button
               type="button"
-              id="sponsor"
+              id="4"
               className={classNames(
-                currentType === "sponsor"
+                currentType === "4"
                   ? "bg-gray-200"
                   : "bg-white hover:bg-gray-50",
                 "relative -ml-px inline-flex items-center border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10  focus:outline-none focus:ring-gray-500"
@@ -206,22 +257,9 @@ export default function Dashboard({ data }: any) {
             </button>
             <button
               type="button"
-              id="exec"
+              id="6"
               className={classNames(
-                currentType === "exec"
-                  ? "bg-gray-200"
-                  : "bg-white hover:bg-gray-50",
-                "relative -ml-px inline-flex items-center border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10  focus:outline-none focus:ring-gray-500"
-              )}
-              onClick={(e) => typeSelect(e)}
-            >
-              $50k-100k
-            </button>
-            <button
-              type="button"
-              id="press"
-              className={classNames(
-                currentType === "press"
+                currentType === "6"
                   ? "bg-gray-200"
                   : "bg-white hover:bg-gray-50",
                 "relative -ml-px inline-flex items-center rounded-r-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10 focus:outline-none focus:ring-gray-500"
@@ -369,21 +407,21 @@ export default function Dashboard({ data }: any) {
                         <td className="whitespace-nowrap px-2 py-3 text-sm text-gray-500">
                           <span
                             className={classNames(
-                              person.checkSize === "$2-5k"
+                              person.checksize_id === 1
                                 ? "bg-green-100 text-green-800"
-                                : person.checkSize === "$5-15k"
+                                : person.checksize_id === 2
                                 ? "bg-blue-100 text-blue-800"
-                                : person.checkSize === "$15-25k"
+                                : person.checksize_id === 3
                                 ? "bg-red-100 text-red-800"
-                                : person.checkSize === "$25-50k"
+                                : person.checksize_id === 4
                                 ? "bg-cyan-100 text-cyan-800"
-                                : person.checkSize === "$100k+"
+                                : person.checksize_id === 6
                                 ? "bg-yellow-100 text-yellow-800"
                                 : "bg-orange-100 text-orange-800",
                               "inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5  "
                             )}
                           >
-                            {person.checkSize ? person.checkSize : "Unknown"}
+                            {checkSizeMap[person.checksize_id]}
                           </span>
                         </td>
                         <td className="max-w-xs px-2 py-3 text-sm text-gray-500">
