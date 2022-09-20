@@ -1,8 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unescaped-entities */
+import Fuse from "fuse.js";
 import Image from "next/future/image";
 import Head from "next/head";
-import { useState } from "react";
+import Highlighter from "react-highlight-words";
+import { useMemo, useState } from "react";
 import EmailIcon from "../components/EmailIcon";
 import prisma from "../utils/prisma";
 import {
@@ -25,17 +27,30 @@ export default function Dashboard({ data }: any) {
     setSelectedCheckSize(e.currentTarget.id);
   }
 
-  let angels = allAngels
+  const options = {
+    threshold: 0.3,
+    location: 0,
+    distance: 100,
+    minMatchCharLength: 2,
+    keys: ["name", "email", "company", "title", "details"],
+  };
+
+  const ALL_ANGELS = allAngels
     .filter((angel: any) => !angel.hidden)
     .sort(compare)
     .filter((person: any) => {
       return selectedCheckSize === "7"
         ? true
         : person.checksize_id.toString() === selectedCheckSize;
-    })
-    .filter((angel: any) =>
-      angel.name.toLowerCase().includes(search.toLowerCase())
-    );
+    });
+
+  const fuse = new Fuse(ALL_ANGELS, options);
+  let angels = useMemo(() => {
+    if (search.length > 0) {
+      return fuse.search(search).map((match) => match.item);
+    }
+    return ALL_ANGELS;
+  }, [search]);
 
   // TODO: Ask Next team why the target in tsconfig is es5
   let companies = [...new Set(angels.map((angel: any) => angel.company))];
@@ -170,7 +185,7 @@ export default function Dashboard({ data }: any) {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className=" rounded-xl shadow-sm inline-flex relative items-center border border-gray-300 px-4 py-2 text-sm text-gray-700 placeholder:text-gray-400 focus:z-10 focus:outline-none focus:ring-gray-500 w-72 pl-10 xs:pl-12"
-              placeholder="Search by name"
+              placeholder="Search..."
             />
           </div>
         </div>
@@ -229,7 +244,11 @@ export default function Dashboard({ data }: any) {
                             </div>
                             <div className="ml-4">
                               <div className="font-medium text-gray-900">
-                                {person.name}
+                                <Highlighter
+                                  searchWords={search.split(" ")}
+                                  autoEscape={true}
+                                  textToHighlight={person.name}
+                                />
                                 {person.twitterVerified && (
                                   <svg
                                     height="20"
@@ -291,10 +310,20 @@ export default function Dashboard({ data }: any) {
                           </div>
                         </td>
                         <td className="whitespace-nowrap px-2 py-3 text-sm text-gray-500">
-                          {person.company ? person.company : "Unknown"}
+                          <Highlighter
+                            searchWords={search.split(" ")}
+                            autoEscape={true}
+                            textToHighlight={person.company ?? "Unknown"}
+                          />
                         </td>
                         <td className="whitespace-nowrap px-2 py-3 text-sm text-gray-500">
-                          {person.title ? person.title : "Software Engineer"}
+                          <Highlighter
+                            searchWords={search.split(" ")}
+                            autoEscape={true}
+                            textToHighlight={
+                              person.title ?? "Software Engineer"
+                            }
+                          />
                         </td>
                         <td className="whitespace-nowrap px-2 py-3 text-sm text-gray-500">
                           <span
@@ -317,7 +346,11 @@ export default function Dashboard({ data }: any) {
                           </span>
                         </td>
                         <td className="max-w-xs px-2 py-3 text-sm text-gray-500">
-                          {person.details}
+                          <Highlighter
+                            searchWords={search.split(" ")}
+                            autoEscape={true}
+                            textToHighlight={person.details}
+                          />
                         </td>
                       </tr>
                     ))}
