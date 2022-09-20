@@ -44,7 +44,7 @@ export default function Dashboard({ data }: any) {
       return fuse.search(search).map((match) => match.item);
     }
     return ALL_ANGELS;
-  }, [search]);
+  }, [search, ALL_ANGELS]);
 
   let companies = [...new Set(angels.map((angel: any) => angel.company))];
   let allChecksizes = angels
