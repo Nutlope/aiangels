@@ -23,6 +23,7 @@ startups, built with Next.js, Tailwind, and Postgres on Railway.
 
 ## Todos v3
 
+- [x] Added additional folks who DMed me
 - [ ] Profile pages like /jaredpalmber with angel investor profile! Very sharable, that also lists confirmed investments
 - [ ] Add an OG Image
 - [ ] Make custom card for the table for mobile to make it responsiveness
