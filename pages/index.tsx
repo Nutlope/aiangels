@@ -2,82 +2,48 @@
 /* eslint-disable react/no-unescaped-entities */
 import Image from "next/future/image";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import EmailIcon from "../components/EmailIcon";
 import prisma from "../utils/prisma";
 import {
-  averageCheckSize,
   checkSizeMap,
   compare,
+  getCheckSizeForId,
   kFormatter,
 } from "../utils/utils";
 
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ");
+}
+
 export default function Dashboard({ data }: any) {
-  const [currentType, setCurrentType] = useState("7");
-  const [angels, setAngels] = useState(
-    JSON.parse(data)
-      .filter((angel: any) => !angel.hidden)
-      .sort(compare)
-  );
-  const [companies, setCompanies] = useState([]);
-  const [averageCheck, setAverageCheck] = useState(0);
+  const allAngels = JSON.parse(data);
+  const [selectedCheckSize, setSelectedCheckSize] = useState("7");
   const [search, setSearch] = useState("");
 
-  function classNames(...classes: string[]) {
-    return classes.filter(Boolean).join(" ");
-  }
-
   function typeSelect(e: any) {
-    setCurrentType(e.currentTarget.id);
+    setSelectedCheckSize(e.currentTarget.id);
   }
 
-  useEffect(() => {
-    if (currentType === "7") {
-      setAngels(
-        JSON.parse(data)
-          .filter((angel: any) => !angel.hidden)
-          .filter((angel: any) =>
-            angel.name.toLowerCase().includes(search.toLowerCase())
-          )
-          .sort(compare)
-      );
-    } else {
-      setAngels(
-        JSON.parse(data)
-          .filter((angel: any) => !angel.hidden)
-          .sort(compare)
-          .filter(
-            (person: any) => person.checksize_id.toString() === currentType
-          )
-          .filter((angel: any) =>
-            angel.name.toLowerCase().includes(search.toLowerCase())
-          )
-      );
-    }
-  }, [currentType, search]);
+  let angels = allAngels
+    .filter((angel: any) => !angel.hidden)
+    .sort(compare)
+    .filter((person: any) => {
+      return selectedCheckSize === "7"
+        ? true
+        : person.checksize_id.toString() === selectedCheckSize;
+    })
+    .filter((angel: any) =>
+      angel.name.toLowerCase().includes(search.toLowerCase())
+    );
 
-  useEffect(() => {
-    // Get all the companies that angels are working at
-    let tempCompanies: any = [];
-    for (let user of angels) {
-      if (!tempCompanies.includes(user.company)) {
-        tempCompanies.push(user.company);
-      }
-    }
-    setCompanies(tempCompanies);
-
-    // Calculate the average check size
-    let total = 0;
-    let count = 0;
-    angels.forEach((angel: any) => {
-      if (angel.checksize_id) {
-        total += averageCheckSize[angel.checksize_id];
-        count++;
-      }
-    });
-    let average = total / count;
-    setAverageCheck(average);
-  }, [angels]);
+  // TODO: Ask Next team why the target in tsconfig is es5
+  let companies = [...new Set(angels.map((angel: any) => angel.company))];
+  let allChecksizes = angels
+    .filter((angel) => angel.checksize_id)
+    .map((angel) => getCheckSizeForId(angel.checksize_id));
+  let averageCheck =
+    allChecksizes.reduce((a, b) => a + b, 0) / allChecksizes.length;
 
   return (
     <div className="min-h-screen bg-gray-100 px-4 pb-10 sm:px-6 lg:px-8">
@@ -165,84 +131,32 @@ export default function Dashboard({ data }: any) {
         </div>
         <div className="sm:flex justify-between hidden mt-4">
           <span className="isolate mt-5 inline-flex rounded-md shadow-sm">
-            <button
-              type="button"
-              id={"7"}
-              className={classNames(
-                currentType === "7"
-                  ? "bg-gray-200"
-                  : "bg-white hover:bg-gray-50",
-                "relative inline-flex items-center rounded-l-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10 focus:outline-none focus:ring-gray-500"
-              )}
-              onClick={(e) => typeSelect(e)}
-            >
-              All
-            </button>
-            <button
-              type="button"
-              id="1"
-              className={classNames(
-                currentType === "1"
-                  ? "bg-gray-200"
-                  : "bg-white hover:bg-gray-50",
-                "relative -ml-px inline-flex items-center border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10  focus:outline-none focus:ring-gray-500"
-              )}
-              onClick={(e) => typeSelect(e)}
-            >
-              $2-5k
-            </button>
-            <button
-              type="button"
-              id="2"
-              className={classNames(
-                currentType === "2"
-                  ? "bg-gray-200"
-                  : "bg-white hover:bg-gray-50",
-                "relative -ml-px inline-flex items-center border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10  focus:outline-none focus:ring-gray-500"
-              )}
-              onClick={(e) => typeSelect(e)}
-            >
-              $5-15k
-            </button>
-            <button
-              type="button"
-              id="3"
-              className={classNames(
-                currentType === "3"
-                  ? "bg-gray-200"
-                  : "bg-white hover:bg-gray-50",
-                "relative -ml-px inline-flex items-center border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10  focus:outline-none focus:ring-gray-500"
-              )}
-              onClick={(e) => typeSelect(e)}
-            >
-              $15-$25k
-            </button>
-            <button
-              type="button"
-              id="4"
-              className={classNames(
-                currentType === "4"
-                  ? "bg-gray-200"
-                  : "bg-white hover:bg-gray-50",
-                "relative -ml-px inline-flex items-center border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10  focus:outline-none focus:ring-gray-500"
-              )}
-              onClick={(e) => typeSelect(e)}
-            >
-              $25-$50k
-            </button>
-            <button
-              type="button"
-              id="6"
-              className={classNames(
-                currentType === "6"
-                  ? "bg-gray-200"
-                  : "bg-white hover:bg-gray-50",
-                "relative -ml-px inline-flex items-center rounded-r-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10 focus:outline-none focus:ring-gray-500"
-              )}
-              onClick={(e) => typeSelect(e)}
-            >
-              $100k+
-            </button>
+            {/* TODO: Add RadioGroup and turn buttons into Options */}
+            {/* <RadioGroup onChange={(e) => setSelectedCheckSize(e.target.value)}> */}
+            {checkSizes.map((checkSize) => (
+              // TODO: Turn into RadioGroup.Option
+              <button
+                key={checkSize.id}
+                type="button"
+                className={classNames(
+                  selectedCheckSize === checkSize.id
+                    ? "bg-gray-200"
+                    : "bg-white hover:bg-gray-50",
+                  "relative inline-flex items-center first-of-type:rounded-l-md last-of-type:rounded-r-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10 focus:outline-none focus:ring-gray-500 -ml-px first-of-type:-ml-0"
+                )}
+                onClick={() => setSelectedCheckSize(checkSize.id)}
+              >
+                {checkSize.label}
+              </button>
+              // <RadioGroup.Option
+              //   className="w-full"
+              //   key={checkSize.id}
+              //   value={checkSize.id}
+              // >
+              //   {checkSize.label}
+              // </RadioGroup.Option>
+            ))}
+            {/* </RadioGroup> */}
           </span>
           <div className="relative mt-5">
             <EmailIcon
@@ -446,3 +360,12 @@ export async function getStaticProps() {
     },
   };
 }
+
+const checkSizes = [
+  { id: "7", label: "All" },
+  { id: "1", label: "$2-5k" },
+  { id: "2", label: "$5-15k" },
+  { id: "3", label: "$15-25k" },
+  { id: "4", label: "$25-50k" },
+  { id: "6", label: "$100k" },
+];

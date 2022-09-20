@@ -30,7 +30,7 @@ export const checkSizeMap = {
   7: "All",
 };
 
-export const averageCheckSize = {
+let checksizes = {
   0: 0,
   1: 3500,
   2: 10000,
@@ -38,3 +38,6 @@ export const averageCheckSize = {
   4: 37500,
   6: 100000,
 };
+export function getCheckSizeForId(id: keyof typeof checksizes) {
+  return checksizes[id];
+}
