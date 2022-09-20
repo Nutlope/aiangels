@@ -25,8 +25,10 @@ startups, built with Next.js, Tailwind, and Postgres on Railway.
 
 - [x] Added additional folks who DMed me
 - [x] Make custom card component for folks to make the table responsive on mobile (Thanks John Phamous!)
+- [x] Make categories and search responsive on mobile (Thanks John Phamous!)
 - [ ] Profile pages like /jaredpalmer with a full angel investor profile. Should include all the info in the table + maybe sections like previous investments
 - [ ] Add an OG Image
-- [ ] Make categories and search responsive on mobile (hiding on mobile for now)
+- [ ] Turn category buttons into Radio Buttons with tailwindUI to improve accessibility
+- [ ] Add cypress tests
 - [ ] General refactoring, split index page into multiple components
 - [ ] Ask Next team why the target in tsconfig is es5

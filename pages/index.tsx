@@ -124,18 +124,7 @@ export default function Dashboard({ data }: any) {
         </div>
         <div className="sm:flex flex-col md:flex-row justify-between mt-4">
           <span className="isolate mt-5 inline-flex rounded-md shadow-sm w-fit">
-            {/* TODO: Add RadioGroup and turn buttons into Options */}
-            {/* <RadioGroup onChange={(e) => setSelectedCheckSize(e.target.value)}> */}
-            {/* // <RadioGroup.Option
-              //   className="w-full"
-              //   key={checkSize.id}
-              //   value={checkSize.id}
-              // >
-              //   {checkSize.label}
-              // </RadioGroup.Option>
-            /* </RadioGroup> */}
             {checkSizes.map((checkSize) => (
-              // TODO: Turn into RadioGroup.Option
               <button
                 key={checkSize.id}
                 type="button"
