@@ -46,7 +46,7 @@ export default function Dashboard({ data }: any) {
     allChecksizes.reduce((a, b) => a + b, 0) / allChecksizes.length;
 
   return (
-    <div className="min-h-screen bg-gray-100 px-4 pb-10 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-100 pb-10 px-6 lg:px-8">
       <Head>
         <title>Devtool Angels</title>
         <meta
@@ -55,7 +55,7 @@ export default function Dashboard({ data }: any) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="mx-auto max-w-6xl pt-20">
+      <div className="mx-auto max-w-6xl pt-8 md:pt-20">
         <div className="sm:flex sm:items-center">
           <div className="sm:flex-auto">
             <h1 className="text-3xl font-semibold text-gray-900">
@@ -129,8 +129,8 @@ export default function Dashboard({ data }: any) {
             </dl>
           </div>
         </div>
-        <div className="sm:flex justify-between hidden mt-4">
-          <span className="isolate mt-5 inline-flex rounded-md shadow-sm">
+        <div className="sm:flex flex-col md:flex-row justify-between mt-4">
+          <span className="isolate mt-5 inline-flex rounded-md shadow-sm w-fit">
             {/* TODO: Add RadioGroup and turn buttons into Options */}
             {/* <RadioGroup onChange={(e) => setSelectedCheckSize(e.target.value)}> */}
             {checkSizes.map((checkSize) => (
@@ -169,17 +169,17 @@ export default function Dashboard({ data }: any) {
               name="search"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className=" rounded-xl shadow-sm inline-flex relative items-center border border-gray-300 px-4 py-2 text-sm text-gray-700 placeholder:text-gray-400 focus:z-10 focus:outline-none focus:ring-gray-500 w-72 pl-10 xs:pl-12"
+              className="w-full rounded-xl shadow-sm inline-flex relative items-center border border-gray-300 px-4 py-2 text-sm text-gray-700 placeholder:text-gray-400 focus:z-10 focus:outline-none focus:ring-gray-500 md:w-72 pl-10 xs:pl-12"
               placeholder="Search by name"
             />
           </div>
         </div>
         <div className="mt-8 flex flex-col">
           <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-              <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-                <table className="min-w-full divide-y divide-gray-300">
-                  <thead className="bg-gray-50">
+            <div className="inline-block min-w-full py-2 align-middle px-6 lg:px-8">
+              <div className="overflow-hidden md:shadow md:ring-1 md:ring-black md:ring-opacity-5 rounded-lg">
+                <table className="min-w-full md:divide-y bg-gray-100 md:bg-transparent divide-gray-300 rounded-lg overflow-hidden md:rounded-none">
+                  <thead className="bg-gray-50 hidden md:table-header-group">
                     <tr>
                       <th
                         scope="col"
@@ -213,10 +213,13 @@ export default function Dashboard({ data }: any) {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-200 bg-white">
+                  <tbody className="md:divide-y divide-gray-200 md:bg-white grid grid-cols-1 gap-3 sm:grid-cols-2 md:table-row-group">
                     {angels.map((person: any) => (
-                      <tr key={person.email}>
-                        <td className="whitespace-nowrap py-2 pl-3 text-sm sm:pl-6">
+                      <tr
+                        key={person.email}
+                        className="grid grid-cols-3 gap-1 md:table-row bg-white rounded-lg md:rounded-none md:bg-transparent shadow md:shadow-none border border-gray-200 md:border-x-0 py-3 px-2 md:p-0"
+                      >
+                        <td className="col-span-3 whitespace-nowrap pl-3 md:py-2 md:pl-6 text-sm sm:pl-6">
                           <div className="flex items-center">
                             <div className="h-10 w-10 flex-shrink-0">
                               <Image
@@ -290,13 +293,13 @@ export default function Dashboard({ data }: any) {
                             </div>
                           </div>
                         </td>
-                        <td className="whitespace-nowrap px-2 py-3 text-sm text-gray-500">
+                        <td className="col-span-1 whitespace-nowrap px-3 md:px-2 md:py-3 text-sm text-gray-500">
                           {person.company ? person.company : "Unknown"}
                         </td>
-                        <td className="whitespace-nowrap px-2 py-3 text-sm text-gray-500">
+                        <td className="col-span-1 whitespace-nowrap px-3 md:px-2 md:py-3 text-sm text-gray-500">
                           {person.title ? person.title : "Software Engineer"}
                         </td>
-                        <td className="whitespace-nowrap px-2 py-3 text-sm text-gray-500">
+                        <td className="col-span-1 whitespace-nowrap px-3 md:px-2 md:py-3 text-sm text-gray-500 justify-self-end">
                           <span
                             className={classNames(
                               person.checksize_id === 1
@@ -316,7 +319,7 @@ export default function Dashboard({ data }: any) {
                             {checkSizeMap[person.checksize_id]}
                           </span>
                         </td>
-                        <td className="max-w-xs px-2 py-3 text-sm text-gray-500">
+                        <td className="col-span-3 md:max-w-xs px-3 md:px-2 md:py-3 text-sm text-gray-500">
                           {person.details}
                         </td>
                       </tr>
