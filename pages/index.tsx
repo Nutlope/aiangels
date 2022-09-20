@@ -275,13 +275,13 @@ export default function Dashboard({ data }: any) {
                             </div>
                           </div>
                         </td>
-                        <td className="col-span-1 whitespace-nowrap px-3 md:px-2 md:py-3 text-sm text-gray-500">
+                        <td className="col-span-1 row-start-2 whitespace-nowrap px-3 md:px-2 md:py-3 text-sm text-gray-500 font-bold md:font-normal">
                           {person.company ? person.company : "Unknown"}
                         </td>
-                        <td className="col-span-1 whitespace-nowrap px-3 md:px-2 md:py-3 text-sm text-gray-500">
+                        <td className="col-span-3 whitespace-nowrap px-3 md:px-2 md:py-3 text-sm text-gray-500 -mt-2 md:mt-0">
                           {person.title ? person.title : "Software Engineer"}
                         </td>
-                        <td className="col-span-1 whitespace-nowrap px-3 md:px-2 md:py-3 text-sm text-gray-500 justify-self-end">
+                        <td className="col-span-3 row-start-2 whitespace-nowrap px-0 md:px-2 md:py-3 text-sm text-gray-500 justify-self-end">
                           <span
                             className={classNames(
                               person.checksize_id === 1
