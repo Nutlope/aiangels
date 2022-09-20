@@ -7,23 +7,17 @@ import EmailIcon from "../components/EmailIcon";
 import prisma from "../utils/prisma";
 import {
   checkSizeMap,
+  checkSizes,
+  classNames,
   compare,
   getCheckSizeForId,
   kFormatter,
 } from "../utils/utils";
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export default function Dashboard({ data }: any) {
   const allAngels = JSON.parse(data);
   const [selectedCheckSize, setSelectedCheckSize] = useState("7");
   const [search, setSearch] = useState("");
-
-  function typeSelect(e: any) {
-    setSelectedCheckSize(e.currentTarget.id);
-  }
 
   let angels = allAngels
     .filter((angel: any) => !angel.hidden)
@@ -37,7 +31,6 @@ export default function Dashboard({ data }: any) {
       angel.name.toLowerCase().includes(search.toLowerCase())
     );
 
-  // TODO: Ask Next team why the target in tsconfig is es5
   let companies = [...new Set(angels.map((angel: any) => angel.company))];
   let allChecksizes = angels
     .filter((angel) => angel.checksize_id)
@@ -133,6 +126,14 @@ export default function Dashboard({ data }: any) {
           <span className="isolate mt-5 inline-flex rounded-md shadow-sm w-fit">
             {/* TODO: Add RadioGroup and turn buttons into Options */}
             {/* <RadioGroup onChange={(e) => setSelectedCheckSize(e.target.value)}> */}
+            {/* // <RadioGroup.Option
+              //   className="w-full"
+              //   key={checkSize.id}
+              //   value={checkSize.id}
+              // >
+              //   {checkSize.label}
+              // </RadioGroup.Option>
+            /* </RadioGroup> */}
             {checkSizes.map((checkSize) => (
               // TODO: Turn into RadioGroup.Option
               <button
@@ -148,15 +149,7 @@ export default function Dashboard({ data }: any) {
               >
                 {checkSize.label}
               </button>
-              // <RadioGroup.Option
-              //   className="w-full"
-              //   key={checkSize.id}
-              //   value={checkSize.id}
-              // >
-              //   {checkSize.label}
-              // </RadioGroup.Option>
             ))}
-            {/* </RadioGroup> */}
           </span>
           <div className="relative mt-5">
             <EmailIcon
@@ -363,12 +356,3 @@ export async function getStaticProps() {
     },
   };
 }
-
-const checkSizes = [
-  { id: "7", label: "All" },
-  { id: "1", label: "$2-5k" },
-  { id: "2", label: "$5-15k" },
-  { id: "3", label: "$15-25k" },
-  { id: "4", label: "$25-50k" },
-  { id: "6", label: "$100k" },
-];
