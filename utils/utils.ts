@@ -41,3 +41,16 @@ let checksizes = {
 export function getCheckSizeForId(id: keyof typeof checksizes) {
   return checksizes[id];
 }
+
+export const checkSizes = [
+  { id: "7", label: "All" },
+  { id: "1", label: "$2-5k" },
+  { id: "2", label: "$5-15k" },
+  { id: "3", label: "$15-25k" },
+  { id: "4", label: "$25-50k" },
+  { id: "6", label: "$100k" },
+];
+
+export function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ");
+}
