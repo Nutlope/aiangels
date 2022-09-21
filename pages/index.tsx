@@ -1,7 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
+import Fuse from "fuse.js";
 import Image from "next/future/image";
 import Head from "next/head";
-import { useState } from "react";
+import Highlighter from "react-highlight-words";
+import { useMemo, useState } from "react";
 import EmailIcon from "../components/EmailIcon";
 import prisma from "../utils/prisma";
 import {
@@ -18,17 +20,30 @@ export default function Dashboard({ data }: any) {
   const [selectedCheckSize, setSelectedCheckSize] = useState("7");
   const [search, setSearch] = useState("");
 
-  let angels = allAngels
+  const options = {
+    threshold: 0.3,
+    location: 0,
+    distance: 100,
+    minMatchCharLength: 2,
+    keys: ["name", "email", "company", "title", "details"],
+  };
+
+  const ALL_ANGELS = allAngels
     .filter((angel: any) => !angel.hidden)
     .sort(compare)
     .filter((person: any) => {
       return selectedCheckSize === "7"
         ? true
         : person.checksize_id.toString() === selectedCheckSize;
-    })
-    .filter((angel: any) =>
-      angel.name.toLowerCase().includes(search.toLowerCase())
-    );
+    });
+
+  const fuse = new Fuse(ALL_ANGELS, options);
+  let angels = useMemo(() => {
+    if (search.length > 0) {
+      return fuse.search(search).map((match) => match.item);
+    }
+    return ALL_ANGELS;
+  }, [search, ALL_ANGELS]);
 
   let companies = [...new Set(angels.map((angel: any) => angel.company))];
   let allChecksizes = angels
@@ -214,7 +229,11 @@ export default function Dashboard({ data }: any) {
                             </div>
                             <div className="ml-4">
                               <div className="font-medium text-gray-900">
-                                {person.name}
+                                <Highlighter
+                                  searchWords={search.split(" ")}
+                                  autoEscape={true}
+                                  textToHighlight={person.name}
+                                />
                                 {person.twitterVerified && (
                                   <svg
                                     height="20"
@@ -276,10 +295,20 @@ export default function Dashboard({ data }: any) {
                           </div>
                         </td>
                         <td className="col-span-1 row-start-2 whitespace-nowrap px-3 md:px-2 md:py-3 text-sm text-gray-500 font-bold md:font-normal">
-                          {person.company ? person.company : "Unknown"}
+                          <Highlighter
+                            searchWords={search.split(" ")}
+                            autoEscape={true}
+                            textToHighlight={person.company ?? "Unknown"}
+                          />
                         </td>
                         <td className="col-span-3 whitespace-nowrap px-3 md:px-2 md:py-3 text-sm text-gray-500 -mt-2 md:mt-0">
-                          {person.title ? person.title : "Software Engineer"}
+                          <Highlighter
+                            searchWords={search.split(" ")}
+                            autoEscape={true}
+                            textToHighlight={
+                              person.title ?? "Software Engineer"
+                            }
+                          />
                         </td>
                         <td className="col-span-3 row-start-2 whitespace-nowrap px-0 md:px-2 md:py-3 text-sm text-gray-500 justify-self-end">
                           <span
@@ -302,7 +331,11 @@ export default function Dashboard({ data }: any) {
                           </span>
                         </td>
                         <td className="col-span-3 md:max-w-xs px-3 md:px-2 md:py-3 text-sm text-gray-500">
-                          {person.details}
+                          <Highlighter
+                            searchWords={search.split(" ")}
+                            autoEscape={true}
+                            textToHighlight={person.details}
+                          />
                         </td>
                       </tr>
                     ))}
