@@ -3,8 +3,8 @@
 import Fuse from "fuse.js";
 import Head from "next/head";
 import { useMemo, useState } from "react";
-import CheckIcon from "../components/CheckIcon";
 import Header from "../components/Header";
+import CheckIcon from "../components/Icons/CheckIcon";
 import InvestorTable from "../components/InvestorTable";
 import SearchBar from "../components/SearchBar";
 import Stats from "../components/Stats";
