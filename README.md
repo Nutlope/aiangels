@@ -31,4 +31,3 @@ startups, built with Next.js, Tailwind, and Postgres on Railway.
 - [ ] Turn category buttons into Radio Buttons with tailwindUI to improve accessibility
 - [ ] Add cypress tests
 - [ ] General refactoring, split index page into multiple components
-- [ ] Ask Next team why the target in tsconfig is es5

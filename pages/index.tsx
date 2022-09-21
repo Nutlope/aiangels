@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unescaped-entities */
 import Image from "next/future/image";
 import Head from "next/head";
@@ -33,10 +32,11 @@ export default function Dashboard({ data }: any) {
 
   let companies = [...new Set(angels.map((angel: any) => angel.company))];
   let allChecksizes = angels
-    .filter((angel) => angel.checksize_id)
-    .map((angel) => getCheckSizeForId(angel.checksize_id));
+    .filter((angel: any) => angel.checksize_id)
+    .map((angel: any) => getCheckSizeForId(angel.checksize_id));
   let averageCheck =
-    allChecksizes.reduce((a, b) => a + b, 0) / allChecksizes.length;
+    allChecksizes.reduce((a: number, b: number) => a + b, 0) /
+    allChecksizes.length;
 
   return (
     <div className="min-h-screen bg-gray-100 pb-10 px-6 lg:px-8">
