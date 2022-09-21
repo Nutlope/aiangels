@@ -54,3 +54,11 @@ export const checkSizes = [
 export function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
+
+export const searchOptions = {
+  threshold: 0.3,
+  location: 0,
+  distance: 100,
+  minMatchCharLength: 2,
+  keys: ["name", "email", "company", "title", "details"],
+};
