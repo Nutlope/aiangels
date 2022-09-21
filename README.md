@@ -1,7 +1,7 @@
-# [DevtoolAngels.com](https://www.devtoolangels.com/)
+# [devtoolangels.com](https://www.devtoolangels.com/)
 
 A list of active angel investors that invest in developer tool
-startups, built with Next.js, Tailwind, and Postgres on Railway.
+startups, built with Next.js, Tailwind, TypeScript, and Postgres on Railway.
 
 ## Todos v1
 
@@ -26,8 +26,8 @@ startups, built with Next.js, Tailwind, and Postgres on Railway.
 - [x] Added additional folks who DMed me
 - [x] Make custom card component for folks to make the table responsive on mobile (Thanks John Phamous!)
 - [x] Make categories and search responsive on mobile (Thanks John Phamous!)
+- [ ] General refactoring, split index page into multiple components
 - [ ] Profile pages like /jaredpalmer with a full angel investor profile. Should include all the info in the table + maybe sections like previous investments
 - [ ] Add an OG Image
 - [ ] Turn category buttons into Radio Buttons with tailwindUI to improve accessibility
 - [ ] Add cypress tests
-- [ ] General refactoring, split index page into multiple components
