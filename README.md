@@ -29,5 +29,5 @@ startups, built with Next.js, Tailwind, TypeScript, and Postgres on Railway.
 - [x] General refactoring, split index page into multiple components
 - [ ] Profile pages like /jaredpalmer with a full angel investor profile. Should include all the info in the table + maybe sections like previous investments
 - [ ] Add an OG Image
-- [ ] Turn category buttons into Radio Buttons with tailwindUI to improve accessibility
+- [ ] Turn category buttons into Radio Buttons with TailwindUI to improve accessibility
 - [ ] Add cypress tests
