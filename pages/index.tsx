@@ -2,6 +2,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import Fuse from "fuse.js";
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
 import Header from "../components/Header";
@@ -31,9 +32,7 @@ export default function Dashboard({ data }: any) {
     .filter((angel: any) => !angel.hidden)
     .sort(compare)
     .filter((person: any) => {
-      return category === "/"
-        ? true
-        : person.checksize_id.toString() === category;
+      return !category ? true : person.checksize_id.toString() === category;
     });
 
   // Fuzzy search with highlighting
@@ -74,19 +73,23 @@ export default function Dashboard({ data }: any) {
         <div className="sm:flex flex-col md:flex-row justify-between mt-4">
           <span className="isolate mt-5 inline-flex rounded-md shadow-sm w-fit">
             {checkSizes.map((checkSize) => (
-              <button
+              <Link
+                href={checkSize.id !== "7" ? `/?category=${checkSize.id}` : "/"}
                 key={checkSize.id}
-                type="button"
-                className={classNames(
-                  category === checkSize.id
-                    ? "bg-gray-200"
-                    : "bg-white hover:bg-gray-50",
-                  "relative inline-flex items-center first-of-type:rounded-l-md last-of-type:rounded-r-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10 focus:outline-none focus:ring-gray-500 -ml-px first-of-type:-ml-0"
-                )}
-                onClick={() => router.push(`/?category=${checkSize.id}`)}
               >
-                {checkSize.label}
-              </button>
+                <a
+                  type="button"
+                  className={classNames(
+                    category === checkSize.id ||
+                      (!category && checkSize.id === "7")
+                      ? "bg-gray-200"
+                      : "bg-white hover:bg-gray-50",
+                    "relative inline-flex items-center first-of-type:rounded-l-md last-of-type:rounded-r-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10 focus:outline-none focus:ring-gray-500 -ml-px first-of-type:-ml-0"
+                  )}
+                >
+                  {checkSize.label}
+                </a>
+              </Link>
             ))}
           </span>
           <SearchBar search={search} setSearch={setSearch} />
