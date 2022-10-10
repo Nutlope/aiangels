@@ -27,7 +27,7 @@ startups, built with Next.js, Tailwind, TypeScript, and Postgres on Railway.
 - [x] Make custom card component for folks to make the table responsive on mobile (Thanks John Phamous!)
 - [x] Make categories and search responsive on mobile (Thanks John Phamous!)
 - [x] General refactoring, split index page into multiple components
-- [ ] Profile pages like /jaredpalmer with a full angel investor profile. Should include all the info in the table + maybe sections like previous investments
+- [ ] Profile pages like /jaredpalmer with a full angel investor profile. Should include all the info in the table + maybe sections like previous investments (in progress)
 - [ ] Add an OG Image
 - [ ] Turn category buttons into Radio Buttons with TailwindUI to improve accessibility
 - [ ] Add cypress tests
