@@ -76,19 +76,15 @@ export default function Dashboard({ data }: any) {
               <Link
                 href={checkSize.id !== "7" ? `/?category=${checkSize.id}` : "/"}
                 key={checkSize.id}
+                className={classNames(
+                  category === checkSize.id ||
+                    (!category && checkSize.id === "7")
+                    ? "bg-gray-200"
+                    : "bg-white hover:bg-gray-50",
+                  "relative inline-flex items-center first-of-type:rounded-l-md last-of-type:rounded-r-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10 focus:outline-none focus:ring-gray-500 -ml-px first-of-type:-ml-0"
+                )}
               >
-                <a
-                  type="button"
-                  className={classNames(
-                    category === checkSize.id ||
-                      (!category && checkSize.id === "7")
-                      ? "bg-gray-200"
-                      : "bg-white hover:bg-gray-50",
-                    "relative inline-flex items-center first-of-type:rounded-l-md last-of-type:rounded-r-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10 focus:outline-none focus:ring-gray-500 -ml-px first-of-type:-ml-0"
-                  )}
-                >
-                  {checkSize.label}
-                </a>
+                {checkSize.label}
               </Link>
             ))}
           </span>

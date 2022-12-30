@@ -1,4 +1,4 @@
-import Image from "next/future/image";
+import Image from "next/image";
 import Highlighter from "react-highlight-words";
 import { checkSizeMap, classNames } from "../utils/utils";
 import CheckIcon from "./Icons/CheckIcon";
