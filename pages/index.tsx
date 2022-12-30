@@ -22,7 +22,6 @@ import {
 export default function Dashboard({ data }: any) {
   const allAngels = JSON.parse(data);
   const [search, setSearch] = useState("");
-  // const [selectedCheckSize, setSelectedCheckSize] = useState("7");
 
   const router = useRouter();
   const { category } = router.query;
