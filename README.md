@@ -1,4 +1,4 @@
-# [devtoolangels.com](https://www.devtoolangels.com/)
+# [Devtoolangels.com](https://www.devtoolangels.com/)
 
 A list of active angel investors that invest in developer tool
 startups, built with Next.js, Tailwind, TypeScript, and Postgres on Railway.
