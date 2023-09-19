@@ -3,19 +3,20 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model Investor {
   id              Int        @id @default(autoincrement())
   name            String
   email           String?
-  twitterPicture  String?
   company         String?
   title           String?
   checkSize       String?
   details         String?
+  twitterPicture  String?
   site            String?
   twitterVerified Boolean?   @default(false)
   hidden          Boolean?   @default(false)
