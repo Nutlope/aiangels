@@ -51,7 +51,7 @@ export default function Dashboard({ data }: any) {
     allChecksizes.length;
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-10 px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-200 pb-10 px-6 lg:px-8">
       <Head>
         <title>AI Angels</title>
         <meta

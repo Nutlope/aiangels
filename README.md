@@ -9,7 +9,7 @@ A list of active angel investors that invest in AI startups.
 - [x] Populate DB with a few investors
 - [x] Look at untitled UI and make it look better
 - [x] Add those charts in the cards and see how well that works
-- [ ] Add proper OG tags and OG image
+- [x] Add proper OG tags and OG image
 - [ ] Migrate to the app router
 
 ## v2 Tasks
