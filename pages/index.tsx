@@ -51,7 +51,7 @@ export default function Dashboard({ data }: any) {
     allChecksizes.length;
 
   return (
-    <div className="min-h-screen bg-gray-100 pb-10 px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 pb-10 px-6 lg:px-8">
       <Head>
         <title>AI Angels</title>
         <meta
@@ -60,13 +60,9 @@ export default function Dashboard({ data }: any) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="mx-auto max-w-6xl pt-8 md:pt-20">
+      <div className="mx-auto max-w-6xl pt-4">
         <Header />
-        <Stats
-          angelsLength={angels.length}
-          averageCheck={averageCheck}
-          companiesLength={companies.length}
-        />
+        <Stats angelsLength={angels.length} averageCheck={averageCheck} />
         <div className="sm:flex flex-col md:flex-row justify-between mt-4">
           <span className="isolate mt-5 inline-flex rounded-md shadow-sm w-fit">
             {checkSizes.map((checkSize) => (

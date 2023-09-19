@@ -124,7 +124,7 @@ export default function InvestorTable({ angels, search }) {
                       : person.checksize_id === 5
                       ? 'bg-yellow-100 text-yellow-800'
                       : 'bg-orange-100 text-orange-800',
-                    'inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5  '
+                    'inline-flex rounded-full px-[9px] py-[2px] text-xs font-semibold leading-5  '
                   )}
                 >
                   {checkSizeMap[person.checksize_id]}
