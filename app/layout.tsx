@@ -1,4 +1,6 @@
 import { Metadata } from 'next';
+import '../styles/globals.css';
+import { Analytics } from '@vercel/analytics/react';
 
 let title = 'AI Angel Investors';
 let description = 'Find your next AI angel';
@@ -37,7 +39,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

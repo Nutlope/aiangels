@@ -1,14 +1,14 @@
+'use client';
+
 import Fuse from 'fuse.js';
-import Head from 'next/head';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 import { useMemo, useState } from 'react';
 import Header from '../components/Header';
 import CheckIcon from '../components/Icons/CheckIcon';
 import InvestorTable from '../components/InvestorTable';
 import SearchBar from '../components/SearchBar';
 import Stats from '../components/Stats';
-import prisma from '../utils/prisma';
 import {
   checkSizes,
   classNames,
@@ -18,11 +18,11 @@ import {
 } from '../utils/utils';
 
 export default function Dashboard({ data }: any) {
-  const allAngels = JSON.parse(data);
+  const allAngels = data;
   const [search, setSearch] = useState('');
 
-  const router = useRouter();
-  const { category } = router.query;
+  const searchParams = useSearchParams();
+  const category = searchParams!.get('category');
 
   // Define filtered & sorted angels array
   const ALL_ANGELS = allAngels
@@ -51,15 +51,7 @@ export default function Dashboard({ data }: any) {
     allChecksizes.length;
 
   return (
-    <div className="min-h-screen bg-gray-200 pb-10 px-6 lg:px-8">
-      <Head>
-        <title>AI Angels</title>
-        <meta
-          name="description"
-          content="A list of angel investors that invest in AI startups."
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div className="min-h-screen bg-gray-50 pb-10 px-6 lg:px-8">
       <div className="mx-auto max-w-6xl pt-4">
         <Header />
         <Stats
@@ -104,14 +96,4 @@ export default function Dashboard({ data }: any) {
       </div>
     </div>
   );
-}
-
-export async function getStaticProps() {
-  const data = await prisma.investor.findMany({});
-
-  return {
-    props: {
-      data: JSON.stringify(data),
-    },
-  };
 }
