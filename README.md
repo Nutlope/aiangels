@@ -4,9 +4,11 @@ A list of active angel investors that invest in AI startups.
 
 ## v1 Tasks
 
-- [ ] Add Vercel postgres
-- [ ] Add Vercel analytics
-- [ ] Add an OG Image
+- [x] Add Vercel postgres
+- [x] Add Vercel analytics
+- [x] Populate DB with a few investors
+- [ ] Look at untitled UI and move to dark mode
+- [ ] Add proper OG tags and OG image
 
 ## v2 Tasks
 

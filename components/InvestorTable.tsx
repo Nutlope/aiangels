@@ -121,7 +121,7 @@ export default function InvestorTable({ angels, search }) {
                       ? 'bg-red-100 text-red-800'
                       : person.checksize_id === 4
                       ? 'bg-cyan-100 text-cyan-800'
-                      : person.checksize_id === 6
+                      : person.checksize_id === 5
                       ? 'bg-yellow-100 text-yellow-800'
                       : 'bg-orange-100 text-orange-800',
                     'inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5  '

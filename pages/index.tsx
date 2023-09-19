@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/no-unescaped-entities */
 import Fuse from 'fuse.js';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -55,10 +53,10 @@ export default function Dashboard({ data }: any) {
   return (
     <div className="min-h-screen bg-gray-100 pb-10 px-6 lg:px-8">
       <Head>
-        <title>Devtool Angels</title>
+        <title>AI Angels</title>
         <meta
           name="description"
-          content="A list of angel investors that invest in developer tools."
+          content="A list of angel investors that invest in AI startups."
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
