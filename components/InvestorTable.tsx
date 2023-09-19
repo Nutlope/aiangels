@@ -1,9 +1,9 @@
-import Image from "next/image";
-import Highlighter from "react-highlight-words";
-import { checkSizeMap, classNames } from "../utils/utils";
-import CheckIcon from "./Icons/CheckIcon";
-import TwitterIcon from "./Icons/TwitterIcon";
-import WebsiteIcon from "./Icons/WebsiteIcon";
+import Image from 'next/image';
+import Highlighter from 'react-highlight-words';
+import { checkSizeMap, classNames } from '../utils/utils';
+import CheckIcon from './Icons/CheckIcon';
+import TwitterIcon from './Icons/TwitterIcon';
+import WebsiteIcon from './Icons/WebsiteIcon';
 
 export default function InvestorTable({ angels, search }) {
   return (
@@ -63,7 +63,7 @@ export default function InvestorTable({ angels, search }) {
                   <div className="ml-4">
                     <div className="font-medium text-gray-900">
                       <Highlighter
-                        searchWords={search.split(" ")}
+                        searchWords={search.split(' ')}
                         autoEscape={true}
                         textToHighlight={person.name}
                       />
@@ -98,33 +98,33 @@ export default function InvestorTable({ angels, search }) {
               </td>
               <td className="col-span-1 row-start-2 whitespace-nowrap px-3 md:px-2 md:py-3 text-sm text-gray-500 font-bold md:font-normal">
                 <Highlighter
-                  searchWords={search.split(" ")}
+                  searchWords={search.split(' ')}
                   autoEscape={true}
-                  textToHighlight={person.company ?? "Unknown"}
+                  textToHighlight={person.company ?? 'Unknown'}
                 />
               </td>
               <td className="col-span-3 whitespace-nowrap px-3 md:px-2 md:py-3 text-sm text-gray-500 -mt-2 md:mt-0">
                 <Highlighter
-                  searchWords={search.split(" ")}
+                  searchWords={search.split(' ')}
                   autoEscape={true}
-                  textToHighlight={person.title ?? "Software Engineer"}
+                  textToHighlight={person.title ?? 'Software Engineer'}
                 />
               </td>
               <td className="col-span-3 row-start-2 whitespace-nowrap px-0 md:px-2 md:py-3 text-sm text-gray-500 justify-self-end">
                 <span
                   className={classNames(
                     person.checksize_id === 1
-                      ? "bg-green-100 text-green-800"
+                      ? 'bg-green-100 text-green-800'
                       : person.checksize_id === 2
-                      ? "bg-blue-100 text-blue-800"
+                      ? 'bg-blue-100 text-blue-800'
                       : person.checksize_id === 3
-                      ? "bg-red-100 text-red-800"
+                      ? 'bg-red-100 text-red-800'
                       : person.checksize_id === 4
-                      ? "bg-cyan-100 text-cyan-800"
+                      ? 'bg-cyan-100 text-cyan-800'
                       : person.checksize_id === 6
-                      ? "bg-yellow-100 text-yellow-800"
-                      : "bg-orange-100 text-orange-800",
-                    "inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5  "
+                      ? 'bg-yellow-100 text-yellow-800'
+                      : 'bg-orange-100 text-orange-800',
+                    'inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5  '
                   )}
                 >
                   {checkSizeMap[person.checksize_id]}
@@ -132,7 +132,7 @@ export default function InvestorTable({ angels, search }) {
               </td>
               <td className="col-span-3 md:max-w-xs px-3 md:px-2 md:py-3 text-sm text-gray-500">
                 <Highlighter
-                  searchWords={search.split(" ")}
+                  searchWords={search.split(' ')}
                   autoEscape={true}
                   textToHighlight={person.details}
                 />

@@ -1,11 +1,15 @@
-# [Devtoolangels.com](https://www.devtoolangels.com/)
+# [aiangels.fund](https://www.aiangels.fund)
 
-A list of active angel investors that invest in developer tool
-startups, built with Next.js, Tailwind, TypeScript, and Postgres on Railway.
+A list of active angel investors that invest in AI startups.
 
-## Future Tasks
+## v1 Tasks
 
-- [ ] Profile pages like /jaredpalmer with a full angel investor profile. Should include all the info in the table + maybe sections like previous investments (in progress)
+- [ ] Add Vercel postgres
+- [ ] Add Vercel analytics
 - [ ] Add an OG Image
+
+## v2 Tasks
+
+- [ ] Migrate to the app router
+- [ ] Profile pages like /jaredpalmer with a full angel investor profile. Should include all the info in the table + maybe sections like previous investments
 - [ ] Turn category buttons into Radio Buttons with TailwindUI to improve accessibility
-- [ ] Add cypress tests

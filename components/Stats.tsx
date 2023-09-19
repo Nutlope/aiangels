@@ -1,4 +1,4 @@
-import { kFormatter } from "../utils/utils";
+import { kFormatter } from '../utils/utils';
 
 export default function Stats({ angelsLength, averageCheck, companiesLength }) {
   return (
@@ -19,7 +19,7 @@ export default function Stats({ angelsLength, averageCheck, companiesLength }) {
               Average Check Size
             </dt>
             <dd className="order-1 text-5xl font-bold tracking-tight text-black">
-              {kFormatter(averageCheck) ? "$" + kFormatter(averageCheck) : "$0"}
+              {kFormatter(averageCheck) ? '$' + kFormatter(averageCheck) : '$0'}
             </dd>
           </div>
           <div className="flex flex-col border-t border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r">

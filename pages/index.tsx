@@ -1,27 +1,27 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unescaped-entities */
-import Fuse from "fuse.js";
-import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useMemo, useState } from "react";
-import Header from "../components/Header";
-import CheckIcon from "../components/Icons/CheckIcon";
-import InvestorTable from "../components/InvestorTable";
-import SearchBar from "../components/SearchBar";
-import Stats from "../components/Stats";
-import prisma from "../utils/prisma";
+import Fuse from 'fuse.js';
+import Head from 'next/head';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useMemo, useState } from 'react';
+import Header from '../components/Header';
+import CheckIcon from '../components/Icons/CheckIcon';
+import InvestorTable from '../components/InvestorTable';
+import SearchBar from '../components/SearchBar';
+import Stats from '../components/Stats';
+import prisma from '../utils/prisma';
 import {
   checkSizes,
   classNames,
   compare,
   getCheckSizeForId,
   searchOptions,
-} from "../utils/utils";
+} from '../utils/utils';
 
 export default function Dashboard({ data }: any) {
   const allAngels = JSON.parse(data);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
 
   const router = useRouter();
   const { category } = router.query;
@@ -73,14 +73,14 @@ export default function Dashboard({ data }: any) {
           <span className="isolate mt-5 inline-flex rounded-md shadow-sm w-fit">
             {checkSizes.map((checkSize) => (
               <Link
-                href={checkSize.id !== "7" ? `/?category=${checkSize.id}` : "/"}
+                href={checkSize.id !== '7' ? `/?category=${checkSize.id}` : '/'}
                 key={checkSize.id}
                 className={classNames(
                   category === checkSize.id ||
-                    (!category && checkSize.id === "7")
-                    ? "bg-gray-200"
-                    : "bg-white hover:bg-gray-50",
-                  "relative inline-flex items-center first-of-type:rounded-l-md last-of-type:rounded-r-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10 focus:outline-none focus:ring-gray-500 -ml-px first-of-type:-ml-0"
+                    (!category && checkSize.id === '7')
+                    ? 'bg-gray-200'
+                    : 'bg-white hover:bg-gray-50',
+                  'relative inline-flex items-center first-of-type:rounded-l-md last-of-type:rounded-r-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10 focus:outline-none focus:ring-gray-500 -ml-px first-of-type:-ml-0'
                 )}
               >
                 {checkSize.label}
