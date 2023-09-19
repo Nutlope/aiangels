@@ -7,11 +7,13 @@ A list of active angel investors that invest in AI startups.
 - [x] Add Vercel postgres
 - [x] Add Vercel analytics
 - [x] Populate DB with a few investors
-- [ ] Look at untitled UI and move to dark mode
+- [x] Look at untitled UI and make it look better
+- [x] Add those charts in the cards and see how well that works
 - [ ] Add proper OG tags and OG image
 
 ## v2 Tasks
 
+- [ ] Dark mode
 - [ ] Migrate to the app router
 - [ ] Profile pages like /jaredpalmer with a full angel investor profile. Should include all the info in the table + maybe sections like previous investments
 - [ ] Turn category buttons into Radio Buttons with TailwindUI to improve accessibility

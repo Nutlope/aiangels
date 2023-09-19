@@ -62,7 +62,11 @@ export default function Dashboard({ data }: any) {
       </Head>
       <div className="mx-auto max-w-6xl pt-4">
         <Header />
-        <Stats angelsLength={angels.length} averageCheck={averageCheck} />
+        <Stats
+          angelsLength={angels.length}
+          averageCheck={averageCheck}
+          companiesLength={companies.length}
+        />
         <div className="sm:flex flex-col md:flex-row justify-between mt-4">
           <span className="isolate mt-5 inline-flex rounded-md shadow-sm w-fit">
             {checkSizes.map((checkSize) => (
