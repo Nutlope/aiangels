@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/react';
 import '../styles/globals.css';
+import Header from '../components/Header';
 
 let title = 'AI Angel Investors';
 let description = 'Find your next AI angel';
@@ -40,7 +41,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <div className="min-h-screen bg-gray-50 pb-10 px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl pt-4">
+            <Header />
+            {children}
+          </div>
+        </div>
         <Analytics />
       </body>
     </html>

@@ -4,7 +4,6 @@ import Fuse from 'fuse.js';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useMemo, useState } from 'react';
-import Header from '../components/Header';
 import CheckIcon from '../components/Icons/CheckIcon';
 import InvestorTable from '../components/InvestorTable';
 import SearchBar from '../components/SearchBar';
@@ -51,49 +50,45 @@ export default function Dashboard({ data }: any) {
     allChecksizes.length;
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-10 px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl pt-4">
-        <Header />
-        <Stats
-          angelsLength={angels.length}
-          averageCheck={averageCheck}
-          companiesLength={companies.length}
-        />
-        <div className="sm:flex flex-col md:flex-row justify-between mt-4">
-          <span className="isolate mt-5 inline-flex rounded-md shadow-sm w-fit">
-            {checkSizes.map((checkSize) => (
-              <Link
-                href={checkSize.id !== '7' ? `/?category=${checkSize.id}` : '/'}
-                key={checkSize.id}
-                className={classNames(
-                  category === checkSize.id ||
-                    (!category && checkSize.id === '7')
-                    ? 'bg-gray-200'
-                    : 'bg-white hover:bg-gray-50',
-                  'relative inline-flex items-center first-of-type:rounded-l-md last-of-type:rounded-r-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10 focus:outline-none focus:ring-gray-500 -ml-px first-of-type:-ml-0'
-                )}
-              >
-                {checkSize.label}
-              </Link>
-            ))}
-          </span>
-          <SearchBar search={search} setSearch={setSearch} />
-        </div>
-        <div className="mt-8 flex flex-col">
-          <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="inline-block min-w-full py-2 align-middle px-6 lg:px-8">
-              <div className="overflow-hidden md:shadow md:ring-1 md:ring-black md:ring-opacity-5 rounded-lg">
-                <InvestorTable angels={angels} search={search} />
-              </div>
-              <div className="text-center mt-10">
-                <CheckIcon className="inline mr-1" />
-                means the angel investor has confirmed their information is
-                accurate and up to date.
-              </div>
+    <>
+      <Stats
+        angelsLength={angels.length}
+        averageCheck={averageCheck}
+        companiesLength={companies.length}
+      />
+      <div className="sm:flex flex-col md:flex-row justify-between mt-4">
+        <span className="isolate mt-5 inline-flex rounded-md shadow-sm w-fit">
+          {checkSizes.map((checkSize) => (
+            <Link
+              href={checkSize.id !== '7' ? `/?category=${checkSize.id}` : '/'}
+              key={checkSize.id}
+              className={classNames(
+                category === checkSize.id || (!category && checkSize.id === '7')
+                  ? 'bg-gray-200'
+                  : 'bg-white hover:bg-gray-50',
+                'relative inline-flex items-center first-of-type:rounded-l-md last-of-type:rounded-r-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10 focus:outline-none focus:ring-gray-500 -ml-px first-of-type:-ml-0'
+              )}
+            >
+              {checkSize.label}
+            </Link>
+          ))}
+        </span>
+        <SearchBar search={search} setSearch={setSearch} />
+      </div>
+      <div className="mt-8 flex flex-col">
+        <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="inline-block min-w-full py-2 align-middle px-6 lg:px-8">
+            <div className="overflow-hidden md:shadow md:ring-1 md:ring-black md:ring-opacity-5 rounded-lg">
+              <InvestorTable angels={angels} search={search} />
+            </div>
+            <div className="text-center mt-10">
+              <CheckIcon className="inline mr-1" />
+              means the angel investor has confirmed their information is
+              accurate and up to date.
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
