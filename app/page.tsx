@@ -10,11 +10,7 @@ const getAllAngels = cache(async () => {
 });
 
 export default async function HomePage() {
-  const data = getAllAngels();
+  const data = await getAllAngels();
 
-  return (
-    <div>
-      <Dashboard data={data} />
-    </div>
-  );
+  return <Dashboard data={data} />;
 }

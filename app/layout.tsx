@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
-import '../styles/globals.css';
 import { Analytics } from '@vercel/analytics/react';
+import '../styles/globals.css';
 
 let title = 'AI Angel Investors';
 let description = 'Find your next AI angel';
