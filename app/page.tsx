@@ -4,7 +4,7 @@ import { cache } from 'react';
 
 export const revalidate = 86400; // revalidate the data at most every 24 hours
 
-export const getAllAngels = cache(async () => {
+const getAllAngels = cache(async () => {
   const data = await prisma.investor.findMany({});
   return data;
 });
