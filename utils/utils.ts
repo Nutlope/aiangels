@@ -1,10 +1,10 @@
 export function compare(a: any, b: any) {
-  if (a.twitterVerified === true && b.twitterVerified !== true) {
-    return -1;
-  }
-  if (a.twitterVerified !== true && b.twitterVerified === true) {
-    return 1;
-  }
+  // if (a.twitterVerified === true && b.twitterVerified !== true) {
+  //   return -1;
+  // }
+  // if (a.twitterVerified !== true && b.twitterVerified === true) {
+  //   return 1;
+  // }
   if (a.checksize_id > b.checksize_id) {
     return -1;
   }
