@@ -41,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="min-h-screen bg-gray-50 pb-10 px-6 lg:px-8">
+        <div className="min-h-screen bg-gray-50 px-6 lg:px-8">
           <div className="mx-auto max-w-6xl pt-4">
             <Header />
             {children}

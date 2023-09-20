@@ -15,6 +15,7 @@ import {
   getCheckSizeForId,
   searchOptions,
 } from '../utils/utils';
+import Footer from '../components/Footer';
 
 export default function Dashboard({ data }: any) {
   const allAngels = data;
@@ -81,11 +82,9 @@ export default function Dashboard({ data }: any) {
             <div className="overflow-hidden md:shadow md:ring-1 md:ring-black md:ring-opacity-5 rounded-lg">
               <InvestorTable angels={angels} search={search} />
             </div>
-            <div className="text-center mt-10">
-              <CheckIcon className="inline mr-1" />
-              means the angel investor has confirmed their information is
-              accurate and up to date.
-            </div>
+            {/* <div className="text-center mt-10"> */}
+            <Footer />
+            {/* </div> */}
           </div>
         </div>
       </div>
