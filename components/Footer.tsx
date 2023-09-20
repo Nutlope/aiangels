@@ -25,7 +25,7 @@ export default function Footer() {
         <Link
           href="https://github.com/Nutlope/aiangels"
           className="group"
-          aria-label="TaxPal on GitHub"
+          aria-label="AI Angels on GitHub"
         >
           <svg
             aria-hidden="true"
