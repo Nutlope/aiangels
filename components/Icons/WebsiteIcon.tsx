@@ -5,7 +5,7 @@ export default function WebsiteIcon(props: any) {
       className="h-5 w-5"
       fill="none"
       viewBox="0 0 24 24"
-      stroke="black"
+      stroke="currentColor"
       strokeWidth="2"
       {...props}
     >

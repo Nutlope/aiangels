@@ -1,28 +1,28 @@
-'use client';
+"use client";
 
-import Fuse from 'fuse.js';
-import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
-import { useMemo, useState } from 'react';
-import CheckIcon from '../components/Icons/CheckIcon';
-import InvestorTable from '../components/InvestorTable';
-import SearchBar from '../components/SearchBar';
-import Stats from '../components/Stats';
+import Fuse from "fuse.js";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { useMemo, useState } from "react";
+import CheckIcon from "../components/Icons/CheckIcon";
+import InvestorTable from "../components/InvestorTable";
+import SearchBar from "../components/SearchBar";
+import Stats from "../components/Stats";
 import {
   checkSizes,
   classNames,
   compare,
   getCheckSizeForId,
   searchOptions,
-} from '../utils/utils';
-import Footer from '../components/Footer';
+} from "../utils/utils";
+import Footer from "../components/Footer";
 
 export default function Dashboard({ data }: any) {
   const allAngels = data;
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   const searchParams = useSearchParams();
-  const category = searchParams!.get('category');
+  const category = searchParams!.get("category");
 
   // Define filtered & sorted angels array
   const ALL_ANGELS = allAngels
@@ -61,13 +61,13 @@ export default function Dashboard({ data }: any) {
         <span className="isolate mt-5 inline-flex rounded-md shadow-sm w-fit">
           {checkSizes.map((checkSize) => (
             <Link
-              href={checkSize.id !== '7' ? `/?category=${checkSize.id}` : '/'}
+              href={checkSize.id !== "7" ? `/?category=${checkSize.id}` : "/"}
               key={checkSize.id}
               className={classNames(
-                category === checkSize.id || (!category && checkSize.id === '7')
-                  ? 'bg-gray-200'
-                  : 'bg-white hover:bg-gray-50',
-                'relative inline-flex items-center first-of-type:rounded-l-md last-of-type:rounded-r-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 focus:z-10 focus:outline-none focus:ring-gray-500 -ml-px first-of-type:-ml-0'
+                category === checkSize.id || (!category && checkSize.id === "7")
+                  ? "bg-gray-200 dark:bg-zinc-700"
+                  : "bg-white dark:bg-zinc-800 hover:bg-gray-50",
+                "relative inline-flex items-center first-of-type:rounded-l-md last-of-type:rounded-r-md border border-gray-300 dark:border-zinc-700 px-4 py-2 text-sm font-medium text-gray-700 dark:text-zinc-100 focus:z-10 focus:outline-none focus:ring-gray-500 -ml-px first-of-type:-ml-0"
               )}
             >
               {checkSize.label}
