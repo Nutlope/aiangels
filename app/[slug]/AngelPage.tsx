@@ -50,9 +50,10 @@ const AngelPage = ({ angel }: { angel: Investor }) => {
                     </a>
                 )}
             </div>
-            <div className="bg-white rounded-lg shadow-md border-gray-300 border max-w-xl">
+            <div className="bg-white rounded-lg shadow-md border-gray-300 border max-w-xl relative">
+                <div className="h-4 w-4 rotate-45 bg-white border-t border-l border-gray-300 absolute -top-2 left-10"></div>
                 {angel.details && (
-                    <h3 className="text-base text-center text-gray-400 font-normal p-4">
+                    <h3 className="text-sm md:text-base text-center text-gray-400 font-normal p-4">
                         "{angel.details}"
                     </h3>
                 )}
