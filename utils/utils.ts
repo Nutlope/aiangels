@@ -49,6 +49,7 @@ export const checkSizes = [
   { id: '2', label: '$5-15k' },
   { id: '3', label: '$15-25k' },
   { id: '4', label: '$25-50k' },
+  { id: '5', label: '$50-100k' },
   { id: '6', label: '$100k' },
 ];
 
