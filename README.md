@@ -17,3 +17,4 @@ This example is powered by the following services:
 
 - [ ] Dark mode
 - [ ] Profile pages with a full angel investor profile. Should include all the info in the table + maybe sections like previous investments
+- [ ] Download people's images locally so twitter profile pics don't break when they change them
