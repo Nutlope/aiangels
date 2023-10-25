@@ -4,7 +4,6 @@ import Fuse from 'fuse.js';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useMemo, useState } from 'react';
-import CheckIcon from '../components/Icons/CheckIcon';
 import InvestorTable from '../components/InvestorTable';
 import SearchBar from '../components/SearchBar';
 import Stats from '../components/Stats';
@@ -61,6 +60,7 @@ export default function Dashboard({ data }: any) {
         <span className="isolate mt-5 inline-flex rounded-md shadow-sm w-fit">
           {checkSizes.map((checkSize) => (
             <Link
+              scroll={false}
               href={checkSize.id !== '7' ? `/?category=${checkSize.id}` : '/'}
               key={checkSize.id}
               className={classNames(
