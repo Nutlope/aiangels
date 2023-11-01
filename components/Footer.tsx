@@ -6,9 +6,9 @@ export default function Footer() {
     <footer className="text-center h-16 sm:h-20 w-full sm:pt-2 pt-4 border-t mt-10 sm:gap-0 gap-4 flex sm:flex-row flex-col justify-between items-center px-3 space-y-2 sm:mb-0 mb-3">
       <div>
         <CheckIcon className="inline mr-1" />
-        means the angel investor has confirmed their information is accurate and
-        up to date.
+        verified.
       </div>
+      <p className="font-semibold text-sm">Made by Dhruv, Nidhi and Richa💖</p>
       <div className="flex space-x-3 sm:space-x-4">
         <a
           href="https://twitter.com/devsbond007"
