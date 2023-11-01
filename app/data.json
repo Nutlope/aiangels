@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "email": "johndoe@example.com",
+    "company": "Doe Investments",
+    "title": "Managing Director",
+    "checkSize": "$5-15k",
+    "details": "Experienced investor with a focus on tech startups.",
+    "twitterPicture": "https://pbs.twimg.com/profile_images/582222032739266561/GVZk2caU_400x400.jpg",
+    "site": "https://www.doeinvestments.com",
+    "twitterVerified": false,
+    "hidden": false,
+    "rank": 5,
+    "createdAt": "2023-11-01T08:00:00.000Z",
+    "updatedAt": "2023-11-01T08:00:00.000Z",
+    "checksize": {
+      "id": 1,
+      "name": "$5-15k",
+      "angels": []
+    }
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "email": "janesmith@example.com",
+    "company": "Smith Ventures",
+    "title": "Investment Partner",
+    "checkSize": "$500,000",
+    "details": "Passionate about clean energy and sustainable startups.",
+    "twitterPicture": "https://pbs.twimg.com/profile_images/582222032739266561/GVZk2caU_400x400.jpg",
+    "site": "https://www.smithventures.com",
+    "twitterVerified": true,
+    "hidden": false,
+    "rank": 3,
+    "createdAt": "2023-11-01T09:00:00.000Z",
+    "updatedAt": "2023-11-01T09:00:00.000Z",
+    "checksize": {
+      "id": 2,
+      "name": "$500,000",
+      "angels": []
+    }
+  },
+  {
+    "id": 3,
+    "name": "David Wilson",
+    "email": "davidwilson@example.com",
+    "company": "Wilson Capital",
+    "title": "Founder & CEO",
+    "checkSize": "$2,000,000",
+    "details": "Investor with a proven track record in the healthcare industry.",
+    "twitterPicture": "https://twitter.com/davidwilson/photohttps://pbs.twimg.com/profile_images/582222032739266561/GVZk2caU_400x400.jpg",
+    "site": "https://www.wilsoncapital.com",
+    "twitterVerified": false,
+    "hidden": true,
+    "rank": 2,
+    "createdAt": "2023-11-01T10:00:00.000Z",
+    "updatedAt": "2023-11-01T10:00:00.000Z",
+    "checksize": {
+      "id": 3,
+      "name": "$2,000,000",
+      "angels": []
+    }
+  }
+]

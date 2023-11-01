@@ -22,7 +22,7 @@ model Investor {
   hidden          Boolean?   @default(false)
   rank            Int?       @default(0)
   createdAt       DateTime   @default(now())
-  updatedAt       DateTime   @updatedAt
+  updatedAt       DateTime?  @updatedAt
   checksize       CheckSize? @relation(fields: [checksize_id], references: [id])
   checksize_id    Int?
 }

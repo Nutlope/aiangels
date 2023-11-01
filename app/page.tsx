@@ -1,6 +1,7 @@
-import Dashboard from './ClientPage';
-import prisma from '../utils/prisma';
-import { cache } from 'react';
+import Dashboard from "./ClientPage";
+import prisma from "../utils/prisma";
+import { cache } from "react";
+// import data from "./data.json";
 
 export const revalidate = 86400; // revalidate the data at most every 24 hours
 
