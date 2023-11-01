@@ -11,7 +11,7 @@ export default function Footer() {
       </div>
       <div className="flex space-x-3 sm:space-x-4">
         <a
-          href="https://twitter.com/nutlope"
+          href="https://twitter.com/devsbond007"
           className="group"
           aria-label="TaxPal on Twitter"
         >
@@ -23,9 +23,9 @@ export default function Footer() {
           </svg>
         </a>
         <a
-          href="https://github.com/Nutlope/aiangels"
+          href="https://github.com/dhruvvbhavsar"
           className="group"
-          aria-label="AI Angels on GitHub"
+          aria-label="GitHub"
         >
           <svg
             aria-hidden="true"
