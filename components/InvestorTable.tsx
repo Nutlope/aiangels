@@ -1,43 +1,43 @@
-import Image from 'next/image';
-import Highlighter from 'react-highlight-words';
-import { checkSizeMap, classNames } from '../utils/utils';
-import CheckIcon from './Icons/CheckIcon';
-import TwitterIcon from './Icons/TwitterIcon';
-import WebsiteIcon from './Icons/WebsiteIcon';
+import Image from "next/image";
+import Highlighter from "react-highlight-words";
+import { checkSizeMap, classNames } from "../utils/utils";
+import CheckIcon from "./Icons/CheckIcon";
+import TwitterIcon from "./Icons/TwitterIcon";
+import WebsiteIcon from "./Icons/WebsiteIcon";
 
 export default function InvestorTable({ angels, search }) {
   return (
     <div>
-      <table className="min-w-full md:divide-y bg-gray-100 md:bg-transparent divide-gray-300 rounded-lg overflow-hidden md:rounded-none">
-        <thead className="bg-gray-50 hidden md:table-header-group">
+      <table className="min-w-full md:divide-y bg-gray-100 dark:bg-zinc-700 md:bg-transparent divide-gray-300 rounded-lg overflow-hidden md:rounded-none">
+        <thead className="bg-gray-50 dark:bg-zinc-700 hidden md:table-header-group">
           <tr>
             <th
               scope="col"
-              className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6"
+              className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 dark:text-zinc-100 sm:pl-6"
             >
               Name
             </th>
             <th
               scope="col"
-              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-zinc-100"
             >
               Company
             </th>
             <th
               scope="col"
-              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-zinc-100"
             >
               Title
             </th>
             <th
               scope="col"
-              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-zinc-100"
             >
               Check Size
             </th>
             <th
               scope="col"
-              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 dark:text-zinc-100"
             >
               Details
             </th>
@@ -47,7 +47,7 @@ export default function InvestorTable({ angels, search }) {
           {angels.map((person: any) => (
             <tr
               key={person.email}
-              className="grid grid-cols-3 gap-1 md:table-row bg-white rounded-lg md:rounded-none md:bg-transparent shadow md:shadow-none border border-gray-200 md:border-x-0 py-3 px-2 md:p-0"
+              className="grid grid-cols-3 gap-1 md:table-row bg-white dark:bg-zinc-800 rounded-lg md:rounded-none md:bg-transparent shadow md:shadow-none border border-gray-200 dark:border-zinc-700 md:border-x-0 py-3 px-2 md:p-0"
             >
               <td className="col-span-3 whitespace-nowrap pl-3 md:py-2 md:pl-6 text-sm sm:pl-6">
                 <div className="flex items-center">
@@ -56,14 +56,14 @@ export default function InvestorTable({ angels, search }) {
                       className="rounded-full"
                       width={40}
                       height={40}
-                      src={person.twitterPicture}
+                      src={person.twitterPicture ?? "/newIcon.svg"}
                       alt="twitter avatar"
                     />
                   </div>
                   <div className="ml-4">
-                    <div className="font-medium text-gray-900">
+                    <div className="font-medium text-gray-900 dark:text-zinc-100">
                       <Highlighter
-                        searchWords={search.split(' ')}
+                        searchWords={search.split(" ")}
                         autoEscape={true}
                         textToHighlight={person.name}
                       />
@@ -79,7 +79,7 @@ export default function InvestorTable({ angels, search }) {
                         rel="noopener noreferrer"
                       >
                         <span className="sr-only">Twitter</span>
-                        <TwitterIcon />
+                        <TwitterIcon className="text-black dark:text-white h-4 w-4" />
                       </a>
                       {person.site && (
                         <a
@@ -89,50 +89,50 @@ export default function InvestorTable({ angels, search }) {
                           rel="noopener noreferrer"
                         >
                           <span className="sr-only">Website</span>
-                          <WebsiteIcon />
+                          <WebsiteIcon className="text-black dark:text-white h-5 w-5" />
                         </a>
                       )}
                     </div>
                   </div>
                 </div>
               </td>
-              <td className="col-span-1 row-start-2 whitespace-nowrap px-3 md:px-2 md:py-3 text-sm text-gray-500 font-bold md:font-normal">
+              <td className="col-span-1 row-start-2 whitespace-nowrap px-3 md:px-2 md:py-3 text-sm text-gray-500 dark:text-zinc-100 font-bold md:font-normal">
                 <Highlighter
-                  searchWords={search.split(' ')}
+                  searchWords={search.split(" ")}
                   autoEscape={true}
-                  textToHighlight={person.company ?? 'Unknown'}
+                  textToHighlight={person.company ?? "Unknown"}
                 />
               </td>
-              <td className="col-span-3 whitespace-nowrap px-3 md:px-2 md:py-3 text-sm text-gray-500 -mt-2 md:mt-0">
+              <td className="col-span-3 whitespace-nowrap px-3 md:px-2 md:py-3 text-sm text-gray-500 dark:text-zinc-100 -mt-2 md:mt-0">
                 <Highlighter
-                  searchWords={search.split(' ')}
+                  searchWords={search.split(" ")}
                   autoEscape={true}
-                  textToHighlight={person.title ?? 'Software Engineer'}
+                  textToHighlight={person.title ?? "Software Engineer"}
                 />
               </td>
-              <td className="col-span-3 row-start-2 whitespace-nowrap px-0 md:px-2 md:py-3 text-sm text-gray-500 justify-self-end">
+              <td className="col-span-3 row-start-2 whitespace-nowrap px-0 md:px-2 md:py-3 text-sm text-gray-500 dark:text-zinc-100 justify-self-end">
                 <span
                   className={classNames(
                     person.checksize_id === 1
-                      ? 'bg-green-100 text-green-800'
+                      ? "bg-green-100 text-green-800"
                       : person.checksize_id === 2
-                      ? 'bg-blue-100 text-blue-800'
+                      ? "bg-blue-100 text-blue-800"
                       : person.checksize_id === 3
-                      ? 'bg-red-100 text-red-800'
+                      ? "bg-red-100 text-red-800"
                       : person.checksize_id === 4
-                      ? 'bg-cyan-100 text-cyan-800'
+                      ? "bg-cyan-100 text-cyan-800"
                       : person.checksize_id === 5
-                      ? 'bg-yellow-100 text-yellow-800'
-                      : 'bg-orange-100 text-orange-800',
-                    'inline-flex rounded-full px-[9px] py-[2px] text-xs font-semibold leading-5  '
+                      ? "bg-yellow-100 text-yellow-800"
+                      : "bg-orange-100 text-orange-800",
+                    "inline-flex rounded-full px-[9px] py-[2px] text-xs font-semibold leading-5  "
                   )}
                 >
                   {checkSizeMap[person.checksize_id]}
                 </span>
               </td>
-              <td className="col-span-3 md:max-w-xs px-3 md:px-2 md:py-3 text-sm text-gray-500">
+              <td className="col-span-3 md:max-w-xs px-3 md:px-2 md:py-3 text-sm text-gray-500 dark:text-zinc-100">
                 <Highlighter
-                  searchWords={search.split(' ')}
+                  searchWords={search.split(" ")}
                   autoEscape={true}
                   textToHighlight={person.details}
                 />

@@ -11,7 +11,7 @@ export default function SearchBar({ search, setSearch }) {
         name="search"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="w-full rounded-xl shadow-sm inline-flex relative items-center border border-gray-300 px-4 py-2 text-sm text-gray-700 placeholder:text-gray-400 focus:z-10 focus:outline-none focus:ring-gray-500 md:w-72 pl-10 xs:pl-12"
+        className="w-full rounded-xl shadow-sm inline-flex relative items-center dark:bg-zinc-800 border dark:border-zinc-700 border-gray-300 px-4 py-2 text-sm text-gray-700 dark:text-zinc-100 placeholder:text-gray-400 focus:z-10 focus:outline-none focus:ring-gray-500 md:w-72 pl-10 xs:pl-12"
         placeholder="Search by name"
       />
     </div>
