@@ -1,6 +1,6 @@
 # [aiangels.fund](https://www.aiangels.fund)
 
-A list of active angel investors that invest in AI startups
+A list of active angel investors that invest in AI startups.
 
 [![AI Angels screenshot](./public/og-image.png)](https://aiangels.fund/)
 
